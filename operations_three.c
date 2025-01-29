@@ -1,39 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_three.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 19:47:25 by mshariar          #+#    #+#             */
+/*   Updated: 2025/01/29 21:15:19 by mshariar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
-
-void	reverse_rotate(t_list **stack)
-{
-    t_list	*last;
-    t_list	*second_last;
-
-    if (!stack || !*stack || !(*stack)->next)
-        return ;
-    last = *stack;
-    second_last = NULL;
-    while (last->next != NULL)
-    {
-        second_last = last;
-        last = last->next;
-    }
-    last->next = *stack;
-    *stack = last;
-    second_last->next = NULL;
-}
 
 void	reverse_rotate_a(t_list **stack_a)
 {
-    reverse_rotate(stack_a);
-    write(1, "rra\n", 4);
+	t_list	*last;
+	t_list	*tmp;
+
+	last = *stack_a;
+	tmp = *stack_a;
+	while (last->next != NULL)
+	{
+		tmp = last;
+		last = last->next;
+	}
+	last->next = *stack_a;
+	*stack_a = last;
+	tmp->next = NULL;
+	write(1, "rra\n", 4);
 }
+
 
 void	reverse_rotate_b(t_list **stack_b)
 {
-    reverse_rotate(stack_b);
-    write(1, "rrb\n", 4);
+	t_list	*last;
+	t_list	*tmp;
+
+	last = *stack_b;
+	tmp = *stack_b;
+	while (last->next != NULL)
+	{
+		tmp = last;
+		last = last->next;
+	}
+	last->next = *stack_b;
+	*stack_b = last;
+	tmp->next = NULL;
+	write(1, "rrb\n", 4);
 }
 
 void	reverse_rotate_both(t_list **stack_a, t_list **stack_b)
 {
-    reverse_rotate(stack_a);
-    reverse_rotate(stack_b);
-    write(1, "rrr\n", 4);
+	t_list	*last;
+	t_list	*tmp;
+
+	last = *stack_a;
+	tmp = *stack_a;
+	while (last->next != NULL)
+	{
+		tmp = last;
+		last = last->next;
+	}
+	last->next = *stack_a;
+	*stack_a = last;
+	tmp->next = NULL;
+	last = *stack_b;
+	tmp = *stack_b;
+	while (last->next != NULL)
+	{
+		tmp = last;
+		last = last->next;
+	}
+	last->next = *stack_b;
+	*stack_b = last;
+	tmp->next = NULL;
+	write(1, "rrr\n", 4);
+	return ;
 }

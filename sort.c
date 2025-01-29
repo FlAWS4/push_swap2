@@ -1,33 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 19:50:21 by mshariar          #+#    #+#             */
+/*   Updated: 2025/01/29 20:49:59 by mshariar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
 #include "push_swap.h"
 
 void	sort_three(t_list **stack_a)
 {
-    int		i;
-    int		j;
-    int		x;
-    t_list	*tmp;
+	int		i;
+	int		j;
+	int		x;
+	t_list	*tmp;
 
-    tmp = NULL;
-    i = 0;
-    j = 0;
-    x = 0;
-    while (!(i < j && j < x && x > i))
-    {
-        tmp = *stack_a;
-        i = tmp->content;
-        tmp = tmp->next;
-        j = tmp->content;
-        tmp = tmp->next;
-        x = tmp->content;
-        if ((i > j && j < x && x > i)
-            || (i > j && j > x && x < i) || (i < j && j > x && x > i))
-            swap_a(stack_a);
-        if (i > j && j < x && x < i)
-            rotate_a(stack_a);
-        if (i < j && j > x && x < i)
-            reverse_rotate_a(stack_a);
-    }
+	tmp = NULL;
+	i = 0;
+	j = 0;
+	x = 0;
+	while (!(i < j && j < x && x > i))
+	{
+		tmp = *stack_a;
+		i = tmp->content;
+		tmp = tmp->next;
+		j = tmp->content;
+		tmp = tmp->next;
+		x = tmp->content;
+		if ((i > j && j < x && x > i)
+			|| (i > j && j > x && x < i) || (i < j && j > x && x > i))
+			swap_a(stack_a);
+		if (i > j && j < x && x < i)
+			rotate_a(stack_a);
+		if (i < j && j > x && x < i)
+			reverse_rotate_a(stack_a);
+	}
 }
 
 void	sort_five(t_list **stack_a, t_list **stack_b)

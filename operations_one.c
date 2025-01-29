@@ -1,60 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_one.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 19:47:18 by mshariar          #+#    #+#             */
+/*   Updated: 2025/01/29 20:24:08 by mshariar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "./libft/libft.h"
 # include "push_swap.h"
 
-void	swap_top_two(t_list **stack)
-{
-    t_list	*first;
-    t_list	*second;
-
-    if (!stack || !*stack || !(*stack)->next)
-        return ;
-    first = *stack;
-    second = first->next;
-    *stack = second;
-    first->next = second->next;
-    second->next = first;
-    write(1, "swap\n", 5);
-}
-
 void	swap_a(t_list **stack_a)
 {
-    swap_top_two(stack_a);
-    write(1, "sa\n", 3);
+	t_list	*tmp;
+	t_list	*tmp2;
+
+	tmp = *stack_a;
+	tmp2 = tmp->next;
+	*stack_a = tmp2;
+	tmp->next = tmp2->next;
+	tmp2->next = tmp;
+	write(1, "sa\n", 3);
+	return ;
 }
 
 void	swap_b(t_list **stack_b)
 {
-    swap_top_two(stack_b);
-    write(1, "sb\n", 3);
+	t_list	*tmp;
+	t_list	*tmp2;
+
+	tmp = *stack_b;
+	tmp2 = tmp->next;
+	*stack_b = tmp2;
+	tmp->next = tmp2->next;
+	tmp2->next = tmp;
+	write(1, "sb\n", 3);
+	return ;
 }
 
 void	swap_both(t_list **stack_a, t_list **stack_b)
 {
-    swap_top_two(stack_a);
-    swap_top_two(stack_b);
-    write(1, "ss\n", 3);
-}
+	t_list	*tmp;
+	t_list	*tmp2;
 
-void	push_to_stack(t_list **src, t_list **dest)
-{
-    t_list	*tmp;
-
-    if (!src || !*src)
-        return ;
-    tmp = *src;
-    *src = (*src)->next;
-    tmp->next = *dest;
-    *dest = tmp;
+	tmp = *stack_a;
+	tmp2 = tmp->next;
+	*stack_a = tmp2;
+	tmp->next = tmp2->next;
+	tmp2->next = tmp;
+	tmp = NULL;
+	tmp2 = NULL;
+	tmp = *stack_b;
+	tmp2 = tmp->next;
+	*stack_b = tmp2;
+	tmp->next = tmp2->next;
+	tmp2->next = tmp;
+	write(1, "ss\n", 3);
+	return ;
 }
 
 void	push_a(t_list **stack_b, t_list **stack_a)
 {
-    push_to_stack(stack_b, stack_a);
-    write(1, "pa\n", 3);
+	t_list	*tmp;
+
+	if (*stack_b == NULL)
+		return ;
+	tmp = *stack_b;
+	*stack_b = (*stack_b)->next;
+	tmp->next = *stack_a;
+	*stack_a = tmp;
+	write(1, "pa\n", 3);
+	return ;
 }
 
 void	push_b(t_list **stack_a, t_list **stack_b)
 {
-    push_to_stack(stack_a, stack_b);
-    write(1, "pb\n", 3);
+	t_list	*tmp;
+
+	if (*stack_a == NULL)
+		return ;
+	tmp = *stack_a;
+	*stack_a = (*stack_a)->next;
+	tmp->next = *stack_b;
+	*stack_b = tmp;
+	write(1, "pb\n", 3);
+	return ;
 }
