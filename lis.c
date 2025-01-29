@@ -1,13 +1,28 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
+int	*allocate_and_initialize(int size, int initial_value)
+{
+    int	*array;
+    int	i;
+
+    array = (int *)malloc(sizeof(int) * size);
+    if (!array)
+        write_error();
+    i = 0;
+    while (i < size)
+    {
+        array[i] = initial_value;
+        i++;
+    }
+    return (array);
+}
+
 int	*lis_util_helper(int max)
 {
     int	*val;
 
-    val = (int *) malloc (sizeof(int) * (max + 1));
-    if (!val)
-        write_error();
+    val = allocate_and_initialize(max + 1, 2147483647);
     val[max - 1] = 2147483647;
     return (val);
 }
@@ -17,23 +32,21 @@ int	*lis_util(int *dst, int *arr, int max, int size)
     int	i;
     int	j;
     int	*val;
-    int	x;
+    int	found;
 
     j = size;
     val = lis_util_helper(max - 1);
     while (max-- >= 1)
     {
         i = j;
-        x = 0;
+        found = 0;
         while (--i >= 0)
         {
-            if (arr[i] == max && ((dst[i] < val[max])
-                    || val[max - 1] == 2147483647)
-                && ((dst[i] > val[max - 1]) || (x == 0)))
+            if (arr[i] == max && (dst[i] < val[max] || val[max - 1] == 2147483647) && (dst[i] > val[max - 1] || !found))
             {
                 val[max - 1] = dst[i];
                 j = i;
-                x = 1;
+                found = 1;
             }
         }
     }
@@ -47,25 +60,22 @@ int	*define_lis(int *dst, int size, int *max)
     int	i;
     int	j;
 
-    i = 0;
-    j = -1;
-    arr = (int *) malloc (sizeof(int) * size);
-    if (!arr)
-        write_error();
-    while (i < size)
-        arr[i++] = 1;
-    while (++j < size)
+    arr = allocate_and_initialize(size, 1);
+    j = 0;
+    while (j < size)
     {
-        i = j - 1;
-        while (++i < size)
+        i = j + 1;
+        while (i < size)
         {
             if (dst[j] < dst[i] && arr[j] == arr[i])
             {
-                arr[i] += 1;
+                arr[i]++;
                 if (arr[i] > *max)
                     *max = arr[i];
             }
+            i++;
         }
+        j++;
     }
     return (lis_util(dst, arr, *max + 1, size));
 }
