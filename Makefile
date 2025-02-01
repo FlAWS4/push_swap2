@@ -15,7 +15,7 @@ OBJ			=	$(SRC:.c=.o)
 
 OBJ_BONUS	=	$(SRC_BONUS:.c=.o)
 
-CC			=	gcc
+CC			=	cc
 
 RM			=	rm -f
 

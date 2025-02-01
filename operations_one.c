@@ -6,13 +6,12 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:47:18 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/29 20:24:08 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:00:19 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "./libft/libft.h"
-# include "push_swap.h"
+#include "push_swap.h"
 
 void	swap_a(t_list **stack_a)
 {

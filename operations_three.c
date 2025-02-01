@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:47:25 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/29 21:15:19 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:00:54 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	reverse_rotate_a(t_list **stack_a)
 	tmp->next = NULL;
 	write(1, "rra\n", 4);
 }
-
 
 void	reverse_rotate_b(t_list **stack_b)
 {

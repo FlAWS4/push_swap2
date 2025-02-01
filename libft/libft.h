@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:56:29 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/28 01:40:17 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/01 19:10:49 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@
 # include "fcntl.h"
 # include "ctype.h"
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 typedef struct s_list
 {
-	int			content;
+	int				content;
 	struct s_list	*next;
 }		t_list;
 
+char	*get_next_line(int fd);
+char	*ft_addstr(char *s1, char *s2);
 int		ft_atoi(const char *str);
 void	write_error(void);
 void	ft_bzero(void *s, size_t n);

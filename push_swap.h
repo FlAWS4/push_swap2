@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/29 19:50:09 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:00:45 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ void	sort_five(t_list **stack_a, t_list **stack_b);
 void	check_arguments(int argc, char **argv, t_list **stack_a);
 void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int max);
 void	move_to_a(t_list **stack_a, t_list **stack_b);
-int		find_best_position_b(t_list **stack_b, int size_b, t_list **stack_a, int size_a);
+int		find_best_position_b(t_list **stack_b, int size_b,
+			t_list **stack_a, int size_a);
 int		find_best_position_a(t_list *stack_a, int size, int *arr, int max);
 int		find_best_combination(int *arr_a, int *arr_b, int size);
-int		find_best_combination_helper(int *arr_a, int *arr_b, int *tmp, int size);
+int		find_best_combination_helper(int *arr_a, int *arr_b,
+			int *tmp, int size);
 int		move_stack_a(int a, int b, t_list **stack_a, t_list **stack_b);
 void	search_min(t_list **stack_a, int size);
 

@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:57 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/29 19:47:00 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:11:21 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execute_sort(t_list **stack_a, t_list **stack_b, char *str)
             rotate_both_checker(stack_a, stack_b);
         else
             execute_reverse_rotate(stack_a, stack_b, str);
-        str = ft_get_next_line_gnl(0);
+        str = get_next_line(0);
     }
 }
 
@@ -97,7 +97,7 @@ int	main(int argc, char *argv[])
         return (0);
     else
         check_arguments_checker(argc, argv, &stack_a);
-    str = ft_get_next_line_gnl(0);
+    str = get_next_line(0);
     execute_sort(&stack_a, &stack_b, str);
     check_sort(stack_a);
     return (0);
