@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_op_one.c                                     :+:      :+:    :+:   */
+/*   check_instruction_one.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:45:33 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 17:51:04 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:40:21 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	swap_a_checker(t_list **stack_a)
+void	ft_sa_check(t_list **stack_a)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -26,7 +26,7 @@ void	swap_a_checker(t_list **stack_a)
 	return ;
 }
 
-void	swap_b_checker(t_list **stack_b)
+void	ft_sb_check(t_list **stack_b)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -39,7 +39,7 @@ void	swap_b_checker(t_list **stack_b)
 	return ;
 }
 
-void	swap_both_checker(t_list **stack_a, t_list **stack_b)
+void	ft_ss_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -59,7 +59,7 @@ void	swap_both_checker(t_list **stack_a, t_list **stack_b)
 	return ;
 }
 
-void	push_a_checker(t_list **stack_b, t_list **stack_a)
+void	ft_pa_check(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*tmp;
 
@@ -72,7 +72,7 @@ void	push_a_checker(t_list **stack_b, t_list **stack_a)
 	return ;
 }
 
-void	push_b_checker(t_list **stack_a, t_list **stack_b)
+void	ft_pb_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_op_two.c                                     :+:      :+:    :+:   */
+/*   check_instruction_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:34 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 17:58:37 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:41:28 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	rotate_a_checker(t_list **stack_a)
+void	ft_ra_check(t_list **stack_a)
 {
 	t_list	*last;
 	t_list	*first;
@@ -30,7 +30,7 @@ void	rotate_a_checker(t_list **stack_a)
 	return ;
 }
 
-void	rotate_b_checker(t_list **stack_b)
+void	ft_rb_check(t_list **stack_b)
 {
 	t_list	*last;
 	t_list	*first;
@@ -47,7 +47,7 @@ void	rotate_b_checker(t_list **stack_b)
 	return ;
 }
 
-void	rotate_both_checker(t_list **stack_a, t_list **stack_b)
+void	ft_rr_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*last;
 	t_list	*first;

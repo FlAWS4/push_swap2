@@ -3,17 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 18:46:19 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:46:24 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	split_list(t_list **stack_a, t_list **stack_b, int size)
+void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
+{
+	t_list	*new_node;
+
+	new_node = NULL;
+	while (i < argc)
+	{
+		new_node = ft_lstnew(ft_atoi(argv[i]));
+		ft_lstadd_back(stack_a, new_node);
+		check_duplicate(*stack_a, new_node->content);
+		i++;
+	}
+	check_sorted(stack_a);
+	check_inverted(stack_a);
+	new_node = NULL;
+}
+
+void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 {
 	int	*dst;
 	int	*arr;
@@ -74,7 +91,7 @@ int	main(int argc, char **argv)
 	size = ft_lstsize(stack_a);
 	if (size == 2)
 		return (0);
-	split_list(&stack_a, &stack_b, size);
+	sort_list(&stack_a, &stack_b, size);
 	delete_list(&stack_a);
 	delete_list(&stack_b);
 	return (0);

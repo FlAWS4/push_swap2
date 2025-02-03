@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 18:57:55 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:45:22 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,4 @@ void	check_inverted(t_list **stack_a)
 		next = next->next;
 	}
 	swap_a(stack_a);
-}
-
-void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
-{
-	t_list	*new_node;
-
-	new_node = NULL;
-	while (i < argc)
-	{
-		new_node = ft_lstnew(ft_atoi(argv[i]));
-		ft_lstadd_back(stack_a, new_node);
-		check_duplicate(*stack_a, new_node->content);
-		i++;
-	}
-	check_sorted(stack_a);
-	check_inverted(stack_a);
-	new_node = NULL;
 }

@@ -2,12 +2,14 @@ NAME		=	push_swap
 
 NAME_BONUS	=	checker
 
-SRC			=	push_swap.c utils.c operations_one.c operations_two.c\
-				operations_three.c order.c order_two.c order_three.c\
-				lis.c sort.c\
+SRC			=	push_swap.c utils.c instrcution_push_swap.c \
+				instruction_rotate.c instruction_rev_rotate.c \
+				instruction_maxnmin.c instruction_calculate_n_copy.c \
+				instruction_postion_n_combination.c instrction_LIS.c \
+				instruction_sort.c \
 
-SRC_BONUS	=	checker.c check_write.c check_op_one.c check_op_two.c\
-				check_op_three.c\
+SRC_BONUS	=	checker.c check_utils.c check_instruction_one.c\
+				check_instruction_two.c check_instruction_three.c\
 
 LIBFT		=	libft/libft.a
 

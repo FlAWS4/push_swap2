@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 19:00:45 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:43:14 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./libft/libft.h"
 
-void	split_list(t_list **stack_a, t_list **stack_b, int size);
+void	sort_list(t_list **stack_a, t_list **stack_b, int size);
 void	initialize_list(t_list **stack_a, int argc, char **argv, int i);
 void	check_duplicate(t_list *stack_a, int value);
 void	check_sorted(t_list **stack_a);
@@ -64,22 +64,22 @@ int		*define_lis(int *dst, int size, int *max);
 int		*lis_util(int *dst, int *arr, int max, int size);
 int		*lis_util_helper(int max);
 
-void	execute_sort(t_list **stack_a, t_list **stack_b, char *str);
-void	execute_reverse_rotate(t_list **stack_a, t_list **stack_b, char *str);
-void	initialize_list_checker(t_list **stack_a, int argc, char **argv, int i);
-void	check_inverted_checker(t_list **stack_a);
-void	check_sort(t_list *stack_a);
-void	check_arguments_checker(int argc, char **argv, t_list **stack_a);
-void	swap_a_checker(t_list **stack_a);
-void	swap_b_checker(t_list **stack_b);
-void	swap_both_checker(t_list **stack_a, t_list **stack_b);
-void	push_a_checker(t_list **stack_b, t_list **stack_a);
-void	push_b_checker(t_list **stack_a, t_list **stack_b);
-void	rotate_a_checker(t_list **stack_a);
-void	rotate_b_checker(t_list **stack_b);
-void	rotate_both_checker(t_list **stack_a, t_list **stack_b);
-void	reverse_rotate_a_checker(t_list **stack_a);
-void	reverse_rotate_b_checker(t_list **stack_b);
-void	reverse_rotate_both_checker(t_list **stack_a, t_list **stack_b);
+void	ft_exec_sort(t_list **stack_a, t_list **stack_b, char *str);
+void	ft_rrr_or_death(t_list **stack_a, t_list **stack_b, char *str);
+void	ft_check_write_lst(t_list **stack_a, int argc, char **argv, int i);
+void	ft_check_lst_inverted(t_list **stack_a);
+void	ft_check_sort(t_list *stack_a);
+void	ft_check_argv_c(int argc, char **argv, t_list **stack_a);
+void	ft_sa_check(t_list **stack_a);
+void	ft_sb_check(t_list **stack_b);
+void	ft_ss_check(t_list **stack_a, t_list **stack_b);
+void	ft_pa_check(t_list **stack_b, t_list **stack_a);
+void	ft_pb_check(t_list **stack_a, t_list **stack_b);
+void	ft_ra_check(t_list **stack_a);
+void	ft_rb_check(t_list **stack_b);
+void	ft_rr_check(t_list **stack_a, t_list **stack_b);
+void	ft_rra_check(t_list **stack_a);
+void	ft_rrb_check(t_list **stack_b);
+void	ft_rrr_check(t_list **stack_a, t_list **stack_b);
 
 #endif
