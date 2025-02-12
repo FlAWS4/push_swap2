@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:21:28 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/28 00:48:12 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/04 18:34:02 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*ft_lstmap(t_list *lst, int *(*f)(int *), void (*del)(int *))
 	newlst = NULL;
 	while (lst)
 	{
-		node = ft_lstnew(*f(&lst->content));
+		node = ft_lstnew(*f(&lst->number));
 		if (!(node))
 		{
 			ft_lstclear(&newlst, (*del));
@@ -34,27 +34,27 @@ t_list	*ft_lstmap(t_list *lst, int *(*f)(int *), void (*del)(int *))
 	return (newlst);
 }
 /*
-void	del(void *content)
+void	del(void *number)
 {
-		free(content);
+		free(number);
 }
-void	*count(void *content)
+void	*count(void *number)
 {
-	*(int *) content += 1;
-	return (content);
+	*(int *) number += 1;
+	return (number);
 }
-void	*cap(void *content)
+void	*cap(void *number)
 {
 	int i;
 	
 	i = 0;
-	char *str = (char *)content;
+	char *str = (char *)number;
 	while (str[i])
 	{
-		((char *) content)[i] = ft_toupper(str[i]);
+		((char *) number)[i] = ft_toupper(str[i]);
 		i++;
 	}
-	return (content);
+	return (number);
 		
 }
 int	main()
@@ -80,7 +80,7 @@ int	main()
 	t_list  *tmp = newmap;
 	while(newmap)
 	{
-		printf("%s\n", (char *)newmap->content);
+		printf("%s\n", (char *)newmap->number);
 		newmap = newmap->next;
 	}
 	ft_lstclear(&newmap, del);

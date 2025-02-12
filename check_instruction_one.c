@@ -6,14 +6,14 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:45:33 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/03 18:40:21 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/09 23:41:14 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	ft_sa_check(t_list **stack_a)
+void	swap_a_check(t_list **stack_a)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -26,7 +26,7 @@ void	ft_sa_check(t_list **stack_a)
 	return ;
 }
 
-void	ft_sb_check(t_list **stack_b)
+void	swap_b_check(t_list **stack_b)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -39,7 +39,7 @@ void	ft_sb_check(t_list **stack_b)
 	return ;
 }
 
-void	ft_ss_check(t_list **stack_a, t_list **stack_b)
+void	swap_s_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -59,7 +59,7 @@ void	ft_ss_check(t_list **stack_a, t_list **stack_b)
 	return ;
 }
 
-void	ft_pa_check(t_list **stack_b, t_list **stack_a)
+void	push_a_check(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*tmp;
 
@@ -72,7 +72,7 @@ void	ft_pa_check(t_list **stack_b, t_list **stack_a)
 	return ;
 }
 
-void	ft_pb_check(t_list **stack_a, t_list **stack_b)
+void	push_b_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 

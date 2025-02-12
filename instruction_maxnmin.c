@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order_three.c                                      :+:      :+:    :+:   */
+/*   instruction_maxnmin.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:13 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 19:05:47 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:58:22 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	return_max_or_min(int cont, int *max_n_min, int size)
+int	return_max_or_min(int nb, int *max_n_min, int size)
 {
-	if (cont > max_n_min[0])
+	if (nb > max_n_min[0])
 		return (max_n_min[2]);
-	if (cont < max_n_min[1])
+	if (nb < max_n_min[1])
 		return (max_n_min[3]);
 	return (size + 1);
 }
 
-int	max_or_min(t_list *stack_a, int cont, int size)
+int	max_or_min(t_list *stack_a, int nb, int size)
 {
 	int	max_n_min[5];
 
-	max_n_min[0] = stack_a->content;
-	max_n_min[1] = stack_a->content;
+	max_n_min[0] = stack_a->number;
+	max_n_min[1] = stack_a->number;
 	max_n_min[2] = 0;
 	max_n_min[3] = 0;
 	max_n_min[4] = 1;
 	while (stack_a != NULL)
 	{
-		if (stack_a->content >= max_n_min[0])
+		if (stack_a->number >= max_n_min[0])
 		{
-			max_n_min[0] = stack_a->content;
+			max_n_min[0] = stack_a->number;
 			max_n_min[2] = max_n_min[4];
 		}
-		if (stack_a->content < max_n_min[1])
+		if (stack_a->number < max_n_min[1])
 		{
-			max_n_min[1] = stack_a->content;
+			max_n_min[1] = stack_a->number;
 			max_n_min[3] = max_n_min[4] - 1;
 		}
 		stack_a = stack_a->next;
 		max_n_min[4]++;
 	}
-	return (return_max_or_min(cont, max_n_min, size));
+	return (return_max_or_min(nb, max_n_min, size));
 }
 
 int	min_number(int a, int b)
@@ -91,18 +91,23 @@ void	search_min(t_list **stack_a, int size)
 	pos_min = 0;
 	pos = 0;
 	tmp = *stack_a;
-	min = tmp->content;
+	min = tmp->number;
 	while (pos < size)
 	{
-		if (min > tmp->content)
+		if (min > tmp->number)
 		{
-			min = tmp->content;
+			min = tmp->number;
 			pos_min = pos;
 		}
 		tmp = tmp->next;
 		pos++;
 	}
 	tmp = NULL;
-	pos = calculate_needed_b(pos_min, size);
-	move_stack_a(pos, 0, stack_a, &tmp);
+	pos = count_moves_b(pos_min, size);
+	push_min_to_top(pos, 0, stack_a, &tmp);
 }
+/*
+printf("max_n_min: [%d, %d, %d, %d, %d]\n", max_n_min[0], max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
+printf("Updated max_n_min: [%d, %d, %d, %d, %d]\n", max_n_min[0], max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
+		printf("stack->a: %d\n",stack_a->number);
+*/

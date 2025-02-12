@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:50:41 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/28 00:44:09 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/04 18:33:44 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(int *))
 	if (lst != NULL)
 	{
 		lst = tmp->next;
-		del(&tmp->content);
+		del(&tmp->number);
 		free(tmp);
 	}
 }
 /*
-void	del(void *content)
+void	del(void *number)
 {
-		free(content);
+		free(number);
 }
 
 int	main()
@@ -50,10 +50,10 @@ int	main()
 	ft_lstdelone(tmp, del);
 	while(node)
 	{
-		printf("%s\n", (char *)node->content);
+		printf("%s\n", (char *)node->number);
 		tmp = node;
 		node = node->next;
-		free (tmp->content);
+		free (tmp->number);
 		free(tmp);
 	}
 }*/

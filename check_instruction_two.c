@@ -6,14 +6,14 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:34 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/03 18:41:28 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/09 23:47:04 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	ft_ra_check(t_list **stack_a)
+void	rotate_a_check(t_list **stack_a)
 {
 	t_list	*last;
 	t_list	*first;
@@ -30,7 +30,7 @@ void	ft_ra_check(t_list **stack_a)
 	return ;
 }
 
-void	ft_rb_check(t_list **stack_b)
+void	rotate_b_check(t_list **stack_b)
 {
 	t_list	*last;
 	t_list	*first;
@@ -47,7 +47,7 @@ void	ft_rb_check(t_list **stack_b)
 	return ;
 }
 
-void	ft_rr_check(t_list **stack_a, t_list **stack_b)
+void	rotate_r_check(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*last;
 	t_list	*first;

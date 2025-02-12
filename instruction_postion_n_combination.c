@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order.c                                            :+:      :+:    :+:   */
+/*   instruction_postion_n_combination.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 18:12:27 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:59:00 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	find_best_position_a(t_list *stack_a, int size, int *arr, int max)
+int	move_remaining_numbers(t_list *stack_a, int size, int *arr, int len)
 {
 	int	pos;
 	int	i;
@@ -23,9 +23,9 @@ int	find_best_position_a(t_list *stack_a, int size, int *arr, int max)
 	while (stack_a != NULL)
 	{
 		i = 0;
-		while (stack_a->content != arr[i] && i < max)
+		while (stack_a->number != arr[i] && i < len)
 		{
-			if (i == max - 1)
+			if (i == len - 1)
 				return (pos);
 			i++;
 		}
@@ -80,7 +80,7 @@ int	find_best_combination(int *arr_a, int *arr_b, int size)
 	return (find_best_combination_helper(arr_a, arr_b, tmp, size));
 }
 
-int	move_stack_a(int a, int b, t_list **stack_a, t_list **stack_b)
+int	push_min_to_top(int a, int b, t_list **stack_a, t_list **stack_b)
 {
 	while (a < 0 && b < 0)
 	{
@@ -118,17 +118,18 @@ int	find_best_position_b(t_list **stack_b, int size_b,
 	if (!arr_b || !arr_a)
 		write_error();
 	while (++i < size_b)
-		arr_b[i] = calculate_needed_b(i, size_b);
+		arr_b[i] = count_moves_b(i, size_b);
 	i = -1;
 	while (++i < size_b && tmp_b != NULL)
 	{
-		arr_a[i] = calculate_needed_a(*stack_a, tmp_b->content, size_a);
+		arr_a[i] = count_moves_a(*stack_a, tmp_b->number, size_a);
 		tmp_b = tmp_b->next;
 	}
 	i = find_best_combination(copy_int_array(arr_a, size_b),
 			copy_int_array(arr_b, size_b), size_b);
-	i = move_stack_a(arr_a[i], arr_b[i], stack_a, stack_b);
+	i = push_min_to_top(arr_a[i], arr_b[i], stack_a, stack_b);
 	free(arr_a);
 	free(arr_b);
 	return (i);
 }
+

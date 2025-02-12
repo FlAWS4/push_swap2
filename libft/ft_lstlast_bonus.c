@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:57:21 by mshariar          #+#    #+#             */
-/*   Updated: 2024/10/30 16:25:40 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:34:04 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	main()
 	node->next->next->next->next = NULL;
 
 	node = ft_lstlast(node);
-	printf("%s\n", (char *)(node->content));
+	printf("%s\n", (char *)(node->number));
 }
 */

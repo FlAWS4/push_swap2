@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/03 15:46:24 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 01:30:27 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 	{
 		new_node = ft_lstnew(ft_atoi(argv[i]));
 		ft_lstadd_back(stack_a, new_node);
-		check_duplicate(*stack_a, new_node->content);
+		check_duplicate(*stack_a, new_node->number);
 		i++;
 	}
 	check_sorted(stack_a);
@@ -32,11 +32,11 @@ void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 
 void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 {
-	int	*dst;
+	int	*stack_numbers;
 	int	*arr;
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 1;
 	if (size == 3)
 	{
 		sort_three(stack_a);
@@ -47,14 +47,15 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 		sort_five(stack_a, stack_b);
 		return ;
 	}
-	dst = copy_stack_content(*stack_a, size);
-	arr = define_lis(dst, size, &i);
-	move_to_b(stack_a, stack_b, arr, i);
+	stack_numbers = copy_stack_number(*stack_a, size);
+	arr = define_lis(stack_numbers, size, &len);
+	move_to_b(stack_a, stack_b, arr, len);
 	move_to_a(stack_a, stack_b);
 	search_min(stack_a, size);
-	free(dst);
+	free(stack_numbers);
 	free(arr);
 }
+
 
 void	check_arguments(int argc, char **argv, t_list **stack_a)
 {
@@ -96,3 +97,72 @@ int	main(int argc, char **argv)
 	delete_list(&stack_b);
 	return (0);
 }
+/*
+void print_stack(t_list *stack, const char *name)
+{
+    printf("%s: ", name);
+    while (stack != NULL)
+    {
+        printf("%d ", stack->number);
+        stack = stack->next;
+    }
+    printf("\n");
+}
+
+void print_array(int *arr, int size, const char *name)
+{
+    printf("%s: ", name);
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+void sort_list(t_list **stack_a, t_list **stack_b, int size)
+{
+    int *stack_numbers;
+    int *arr;
+    int len;
+
+    len = 1;
+    if (size == 3)
+    {
+        sort_three(stack_a);
+        return;
+    }
+    if (size == 5)
+    {
+        sort_five(stack_a, stack_b);
+        return;
+    }
+    stack_numbers = copy_stack_number(*stack_a, size);
+    arr = define_lis(stack_numbers, size, &len);
+
+    // Print the initial state
+    print_stack(*stack_a, "stack_a");
+    print_stack(*stack_b, "stack_b");
+    print_array(stack_numbers, size, "stack_numbers");
+    print_array(arr, len, "arr");
+    printf("len: %d\n", len);
+
+    move_to_b(stack_a, stack_b, arr, len);
+
+    // Print the state after moving to stack_b
+    print_stack(*stack_a, "stack_a");
+    print_stack(*stack_b, "stack_b");
+
+    move_to_a(stack_a, stack_b);
+
+    // Print the state after moving back to stack_a
+    print_stack(*stack_a, "stack_a");
+    print_stack(*stack_b, "stack_b");
+
+    search_min(stack_a, size);
+
+    // Print the final state
+    print_stack(*stack_a, "stack_a");
+    print_stack(*stack_b, "stack_b");
+
+    free(stack_numbers);
+    free(arr);
+}*/

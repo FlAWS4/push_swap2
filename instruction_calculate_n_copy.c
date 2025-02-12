@@ -1,60 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order_two.c                                        :+:      :+:    :+:   */
+/*   instruction_calculate_n_copy.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:24 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/01 18:18:23 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:59:36 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	calculate_needed(int min, int max, int size)
+int	count_moves(int min, int len, int size)
 {
 	int	i;
 
 	if (min > (size / 2))
 		min = min - size;
-	if (max > (size / 2))
-		max = max - size;
-	i = min_number(max, min);
+	if (len > (size / 2))
+		len = len - size;
+	i = min_number(len, min);
 	return (i);
 }
 
-int	calculate_needed_b(int max, int size)
+int	count_moves_b(int len, int size)
 {
-	if (max > (size / 2))
-		max = max - size;
-	return (max);
+	if (len > (size / 2))
+		len = len - size;
+	return (len);
 }
 
-int	calculate_needed_a(t_list *stack_a, int cont, int size)
+int	count_moves_a(t_list *stack_a, int nb, int size)
 {
 	t_list	*tmp;
 	int		i;
 
 	tmp = stack_a;
-	i = max_or_min(stack_a, cont, size);
+	i = max_or_min(stack_a, nb, size);
 	if (i != size + 1)
-		return (calculate_needed_b(i, size));
+		return (count_moves_b(i, size));
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	if (cont < stack_a->content && cont > tmp->content)
+	if (nb < stack_a->number && nb > tmp->number)
 		return (0);
 	i = 1;
-	while (!(cont > stack_a->content && cont < (stack_a->next)->content))
+	while (!(nb > stack_a->number && nb < (stack_a->next)->number))
 	{
 		stack_a = stack_a->next;
 		i++;
 	}
-	return (calculate_needed_b(i, size));
+	return (count_moves_b(i, size));
 }
 
-int	*copy_stack_content(t_list *stack_a, int size)
+int	*copy_stack_number(t_list *stack_a, int size)
 {
 	int	*arr;
 	int	i;
@@ -65,7 +65,7 @@ int	*copy_stack_content(t_list *stack_a, int size)
 		write_error();
 	while (stack_a != NULL)
 	{
-		arr[i++] = (stack_a)->content;
+		arr[i++] = (stack_a)->number;
 		stack_a = (stack_a)->next;
 	}
 	return (arr);

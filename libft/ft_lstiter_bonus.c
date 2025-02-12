@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:11:30 by mshariar          #+#    #+#             */
-/*   Updated: 2025/01/28 00:46:27 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/04 18:33:50 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ft_lstiter(t_list *lst, void (*f)(int *))
 		return ;
 	while (lst != NULL)
 	{
-		f(&lst->content);
+		f(&lst->number);
 		lst = lst->next;
 	}
 }
 
-void	func(void *content)
+void	func(void *number)
 {
-	*(int *)content += 1;
+	*(int *)number += 1;
 }
 /*
 int	main()
@@ -46,7 +46,7 @@ int	main()
 	ft_lstiter(list, func);
 	while (list)
 	{
-		printf("%d\n", *(int *)list->content);
+		printf("%d\n", *(int *)list->number);
 		list = list->next;
 	}	
 }*/
