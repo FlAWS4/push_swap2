@@ -6,111 +6,88 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:06:01 by mshariar          #+#    #+#             */
-/*   Updated: 2024/10/24 15:32:01 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:56:53 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	sep(char const *str, char c)
+static int	count_word(char *s, char c)
 {
-	int	i;
-	int	token;
-
-	i = 0;
-	token = 0;
-	while (str[i])
-	{
-		while (str[i] == c)
-			i++;
-		if (str[i] && str[i] != c)
-			token++;
-		while (str[i] && str[i] != c)
-			i++;
-	}
-	return (token);
-}
-
-char	*ft_dup(char const *str, char c)
-{
-	char	*dest;
 	int		i;
-	int		j;
-
+	size_t	count;
+	count = 0;
 	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	dest = (char *)malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	j = 0;
-	while (i > j)
+	while (*s)
 	{
-		dest[j] = str[j];
-		j++;
-	}
-	dest[j] = '\0';
-	return (dest);
-}
-
-static int	split(char **tab, char const *s, char c, int tab_i)
-{
-	tab[tab_i] = ft_dup(s, c);
-	if (!tab[tab_i])
-		return (0);
-	return (1);
-}
-
-static	char	**freeall(char **tab, int i)
-{
-	while (i > 0)
-	{
-		free (tab[i - 1]);
-		i--;
-	}
-	free (tab);
-	return (NULL);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**tab;
-	int		tab_i;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	tab = malloc((sep(s, c) + 1) * sizeof (char *));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	tab_i = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i] && s[i] != c)
+		if (*s != c && i == 0)
 		{
-			if (!split(tab, s + i, c, tab_i++))
-				return (freeall(tab, tab_i));
+			count++;
+			i = 1;
 		}
-		while (s[i] && s[i] != c)
-			i++;
+		else if (*s == c)
+			i = 0;
+		s++;
 	}
-	tab[tab_i] = NULL;
-	return (tab);
+	return (count);
 }
-/*
-int	main()
+static int	safe_malloc(char **tab, int i, size_t word)
 {
-	int i = 0;
-	//char *str = " *****h******ello * spsklfslkdsflit * this";
-	//char c = '*';
-	char **split = ft_split("  tripouille  42  ", '');
-	while (split[i])
+	int	j;
+	j = 0;
+	tab[i] = malloc(word);
+	if (tab[i] == NULL)
 	{
-		printf("%s\n", split[i]);
-		i++;
+		while (j < i)
+		{
+			free(tab[j]);
+			j++;
+		}
+		free(tab);
+		return (1);
 	}
 	return (0);
-}*/
+}
+static int	fill_word(char **tab, char *s, char c)
+{
+	size_t		word_len;
+	int			i;
+	char		*start;
+	i = 0;
+	while (*s)
+	{
+		word_len = 0;
+		while (*s == c && *s)
+			s++;
+		start = s;
+		while (*s != c && *s)
+		{
+			word_len++;
+			s++;
+		}
+		if (word_len > 0)
+		{
+			if (safe_malloc(tab, i, word_len + 1))
+				return (1);
+			ft_strlcpy(tab[i], start, word_len + 1);
+			i++;
+		}
+	}
+	return (0);
+}
+char	**ft_split(char *s, char c)
+{
+	char		**tab;
+	size_t		word;
+	if (s == NULL)
+		return (NULL);
+	word = 0;
+	word = count_word(s, c);
+	tab = malloc((word + 1) * sizeof(char *));
+	if (!tab)
+		return (NULL);
+	tab[word] = NULL;
+	if (fill_word(tab, s, c))
+		return (NULL);
+	return (tab);
+}

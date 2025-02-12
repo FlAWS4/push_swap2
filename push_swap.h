@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/11 14:23:11 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 23:04:58 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	reverse_rotate_b(t_list **stack_b);
 void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
 void	sort_three(t_list **stack_a);
 void	sort_five(t_list **stack_a, t_list **stack_b);
-
+void	free_tab(char **tab);
+void	sort_two(t_list	**stack_a);
 void	check_arguments(int argc, char **argv, t_list **stack_a);
 void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int len);
 void	move_to_a(t_list **stack_a, t_list **stack_b);
@@ -59,9 +60,13 @@ int		min_number(int a, int b);
 int		max_or_min(t_list *stack_a, int nb, int size);
 int		return_max_or_min(int nb, int *len_n_min, int size);
 
+int		*construct_lis(int *stack_numbers,
+			int *prev, int lis_length, int end_index);
+int		find_max_lis_length(int *lis, int size, int *end_index);
+void	update_lis_and_prev(int *lis, int *prev, int *stack_numbers, int size);
+void	initialize_lis_and_prev(int *lis, int *prev, int size);
 int		*define_lis(int *stack_numbers, int size, int *len);
-int *find_lis_and_len(int *stack_numbers, int size, int *len);
-
+int		*find_lis_and_len(int *stack_numbers, int size, int *len);
 
 void	check_instruction(t_list **stack_a, t_list **stack_b, char *str);
 void	check_instruction_rrr(t_list **stack_a, t_list **stack_b, char *str);

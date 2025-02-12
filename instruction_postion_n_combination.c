@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction_postion_n_combination.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 16:59:00 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 20:35:38 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,3 @@ int	find_best_position_b(t_list **stack_b, int size_b,
 	free(arr_b);
 	return (i);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction_maxnmin.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:13 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 16:58:22 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 20:35:12 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ void	search_min(t_list **stack_a, int size)
 	push_min_to_top(pos, 0, stack_a, &tmp);
 }
 /*
-printf("max_n_min: [%d, %d, %d, %d, %d]\n", max_n_min[0], max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
-printf("Updated max_n_min: [%d, %d, %d, %d, %d]\n", max_n_min[0], max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
+printf("max_n_min: [%d, %d, %d, %d, %d]\n",
+ max_n_min[0], max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
+printf("Updated max_n_min: [%d, %d, %d, %d, %d]\n", max_n_min[0], 
+max_n_min[1], max_n_min[2], max_n_min[3], max_n_min[4]);
 		printf("stack->a: %d\n",stack_a->number);
 */

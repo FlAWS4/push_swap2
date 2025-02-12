@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 01:30:27 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 23:14:15 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 	int	*arr;
 	int	len;
 
-	len = 1;
+	len = 0;
 	if (size == 3)
 	{
 		sort_three(stack_a);
@@ -56,7 +56,6 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 	free(arr);
 }
 
-
 void	check_arguments(int argc, char **argv, t_list **stack_a)
 {
 	int		size;
@@ -70,12 +69,25 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 		while (arg[size] != NULL)
 			size++;
 		initialize_list(stack_a, size, arg, 0);
-		free(arg);
 	}
 	else if (argc >= 3)
 		initialize_list(stack_a, argc, argv, 1);
+	free_tab(arg);
 }
+void	free_tab(char **tab)
+{
+	int	i;
 
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;

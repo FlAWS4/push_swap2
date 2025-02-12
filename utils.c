@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/04 18:28:08 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 23:10:54 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
+
+void	initialize_lis_and_prev(int *lis, int *prev, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		lis[i] = 1;
+		prev[i] = -1;
+		i++;
+	}
+}
 
 void	delete_list(t_list **stack)
 {
@@ -52,6 +65,7 @@ void	check_sorted(t_list **stack_a)
 		current = current->next;
 		next = next->next;
 	}
+	delete_list(stack_a);
 	exit(0);
 }
 

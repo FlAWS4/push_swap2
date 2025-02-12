@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:57 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 16:03:01 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 20:34:26 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	check_instruction(t_list **stack_a, t_list **stack_b, char *str)
 		else
 			check_instruction_rrr(stack_a, stack_b, str);
 		str = get_next_line(0);
-		printf("%s\n", str);
 	}
 }
 

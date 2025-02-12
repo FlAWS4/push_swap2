@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction_sort.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:21 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 16:59:53 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/12 22:04:59 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,33 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 	search_min(stack_a, ft_lstsize(*stack_a));
 }
 
-void move_to_a(t_list **stack_a, t_list **stack_b)
+void	move_to_a(t_list **stack_a, t_list **stack_b)
 {
-    int best_pos;
-    int size_a;
-    int size_b;
+	int	best_pos;
+	int	size_a;
+	int	size_b;
 
-    size_a = ft_lstsize(*stack_a);
-    size_b = ft_lstsize(*stack_b);
-    while (*stack_b != NULL)
-    {
-        best_pos = find_best_position_b(stack_b, size_b, stack_a, size_a);
-        if (best_pos < 0)
-        {
-            while (best_pos++ < 0)
-                reverse_rotate_b(stack_b);
-        }
-        else if (best_pos > 0)
-        {
-            while (best_pos-- > 0)
-                rotate_b(stack_b);
-        }
-        push_a(stack_b, stack_a);
-        size_a++;
-        size_b--;
-    }
+	size_a = ft_lstsize(*stack_a);
+	size_b = ft_lstsize(*stack_b);
+	while (*stack_b != NULL)
+	{
+		best_pos = find_best_position_b(stack_b, size_b, stack_a, size_a);
+		if (best_pos < 0)
+		{
+			while (best_pos++ < 0)
+				reverse_rotate_b(stack_b);
+		}
+		else if (best_pos > 0)
+		{
+			while (best_pos-- > 0)
+				rotate_b(stack_b);
+		}
+		push_a(stack_b, stack_a);
+		size_a++;
+		size_b--;
+	}
 }
+
 void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int len)
 {
 	int	i;
@@ -92,13 +93,12 @@ void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int len)
 		if (i > 0)
 		{
 			while (i > 0)
-			{				
+			{
 				rotate_a(stack_a);
 				i--;
-			} 
+			}
 		}
 		push_b(stack_a, stack_b);
 		i = move_remaining_numbers(*stack_a, --size_a, arr, len);
 	}
 }
- 
