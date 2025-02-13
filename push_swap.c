@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 23:14:15 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:08:15 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,23 @@
 void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 {
 	t_list	*new_node;
+	int		error;
 
+	error = 0;
 	new_node = NULL;
 	while (i < argc)
 	{
 		new_node = ft_lstnew(ft_atoi(argv[i]));
 		ft_lstadd_back(stack_a, new_node);
-		check_duplicate(*stack_a, new_node->number);
+		error = check_duplicate(*stack_a, new_node->number);
+		if (error == -1)
+			break ;
 		i++;
+	}
+	if (error == -1)
+	{
+		delete_list(stack_a);
+		write_error();
 	}
 	check_sorted(stack_a);
 	check_inverted(stack_a);
@@ -103,7 +112,10 @@ int	main(int argc, char **argv)
 		check_arguments(argc, argv, &stack_a);
 	size = ft_lstsize(stack_a);
 	if (size == 2)
-		return (0);
+	{
+		delete_list(&stack_a);
+		return (-1);
+	}
 	sort_list(&stack_a, &stack_b, size);
 	delete_list(&stack_a);
 	delete_list(&stack_b);

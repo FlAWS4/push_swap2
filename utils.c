@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 23:10:54 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:05:37 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,17 @@ void	delete_list(t_list **stack)
 	}
 }
 
-void	check_duplicate(t_list *stack_a, int value)
+int	check_duplicate(t_list *stack_a, int value)
 {
 	while (stack_a->next != NULL)
 	{
 		if (stack_a->number == value)
-			write_error();
+		{
+			return (-1);
+		}
 		stack_a = stack_a->next;
 	}
+	return (1);
 }
 
 void	check_sorted(t_list **stack_a)

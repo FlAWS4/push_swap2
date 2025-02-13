@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 23:04:58 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:07:29 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	sort_list(t_list **stack_a, t_list **stack_b, int size);
 void	initialize_list(t_list **stack_a, int argc, char **argv, int i);
-void	check_duplicate(t_list *stack_a, int value);
+int		check_duplicate(t_list *stack_a, int value);
 void	check_sorted(t_list **stack_a);
 void	check_inverted(t_list **stack_a);
 void	delete_list(t_list **stack);
@@ -36,7 +36,6 @@ void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
 void	sort_three(t_list **stack_a);
 void	sort_five(t_list **stack_a, t_list **stack_b);
 void	free_tab(char **tab);
-void	sort_two(t_list	**stack_a);
 void	check_arguments(int argc, char **argv, t_list **stack_a);
 void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int len);
 void	move_to_a(t_list **stack_a, t_list **stack_b);
@@ -68,11 +67,12 @@ void	initialize_lis_and_prev(int *lis, int *prev, int size);
 int		*define_lis(int *stack_numbers, int size, int *len);
 int		*find_lis_and_len(int *stack_numbers, int size, int *len);
 
+void	check_delete_list(t_list **stack);
+int		check_dup(t_list *stack_a, int check);
 void	check_instruction(t_list **stack_a, t_list **stack_b, char *str);
 void	check_instruction_rrr(t_list **stack_a, t_list **stack_b, char *str);
 void	check_initialize_list(t_list **stack_a, int argc, char **argv, int i);
-void	check_lst_inverted(t_list **stack_a);
-void	ok_or_ko(t_list *stack_a);
+int		ok_or_ko(t_list **stack_a);
 void	swap_a_check(t_list **stack_a);
 void	swap_b_check(t_list **stack_b);
 void	swap_s_check(t_list **stack_a, t_list **stack_b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:57 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 20:34:26 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:35:57 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,7 @@ void	check_instruction(t_list **stack_a, t_list **stack_b, char *str)
 	}
 }
 
-void	ok_or_ko(t_list *stack_a)
-{
-	while (stack_a->next != NULL)
-	{
-		if (stack_a->number > (stack_a->next)->number)
-		{
-			write(1, "KO\n", 3);
-			return ;
-		}
-		stack_a = stack_a->next;
-	}
-	write(1, "OK\n", 3);
-	return ;
-}
+
 
 void	check_args(int argc, char **argv, t_list **stack_a)
 {
@@ -99,6 +86,9 @@ int	main(int argc, char *argv[])
 		check_args(argc, argv, &stack_a);
 	str = get_next_line(0);
 	check_instruction(&stack_a, &stack_b, str);
-	ok_or_ko(stack_a);
+	if (ok_or_ko(&stack_a) == -1)
+		ft_putstr_fd("KO\n", 1);
+	else
+		ft_putstr_fd("OK\n", 1);
 	return (0);
 }
