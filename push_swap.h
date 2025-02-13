@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 17:07:29 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/13 22:58:24 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "./libft/libft.h"
 
 void	sort_list(t_list **stack_a, t_list **stack_b, int size);
-void	initialize_list(t_list **stack_a, int argc, char **argv, int i);
+int	initialize_list(t_list **stack_a, int argc, char **argv, int i);
 int		check_duplicate(t_list *stack_a, int value);
-void	check_sorted(t_list **stack_a);
+void	check_sorted(t_list **stack_a, int ac, char **av);
 void	check_inverted(t_list **stack_a);
 void	delete_list(t_list **stack);
 

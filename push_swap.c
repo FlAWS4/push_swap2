@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 17:08:15 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/13 23:03:01 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
+int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 {
 	t_list	*new_node;
 	int		error;
@@ -26,17 +26,16 @@ void	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
 		if (error == -1)
+		{
+			return (-1);
 			break ;
+		}
 		i++;
 	}
-	if (error == -1)
-	{
-		delete_list(stack_a);
-		write_error();
-	}
-	check_sorted(stack_a);
+	//check_sorted(stack_a, argc, argv);
 	check_inverted(stack_a);
 	new_node = NULL;
+	return (0);
 }
 
 void	sort_list(t_list **stack_a, t_list **stack_b, int size)
@@ -64,12 +63,30 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 	free(stack_numbers);
 	free(arr);
 }
+void	check_arg3(int argc, char **argv, t_list **stack_a)
+{
+	int	i;
+
+	i = 0;
+	if (argc >= 3)
+	{
+		i = 0;
+		i = initialize_list(stack_a, argc, argv, 1);
+		if (i == -1)
+		{
+			delete_list(stack_a);
+			write_error();
+		}
+	}
+}
 
 void	check_arguments(int argc, char **argv, t_list **stack_a)
 {
 	int		size;
 	char	**arg;
+	int		i;
 
+	i = 0;
 	arg = NULL;
 	size = 0;
 	if (argc == 2)
@@ -77,12 +94,20 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 		arg = ft_split(argv[1], ' ');
 		while (arg[size] != NULL)
 			size++;
-		initialize_list(stack_a, size, arg, 0);
+		i = initialize_list(stack_a, size, arg, 0);
+		if (i == -1)
+		{
+			delete_list(stack_a);
+			free_tab(arg);
+			write_error();
+		}
+		///check_sorted(stack_a, argc, argv);
 	}
 	else if (argc >= 3)
-		initialize_list(stack_a, argc, argv, 1);
+		check_arg3(argc, argv, stack_a);
 	free_tab(arg);
 }
+
 void	free_tab(char **tab)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:56:29 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/12 22:57:17 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/13 22:34:55 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_list
 }		t_list;
 
 char	*get_next_line(int fd);
-char	*ft_addstr(char *s1, char *s2);
 int		ft_atoi(const char *str);
 void	write_error(void);
 void	ft_bzero(void *s, size_t n);
