@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:56:29 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 22:34:55 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:09:40 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "unistd.h"
 # include "fcntl.h"
 # include "ctype.h"
-#include "stdbool.h"
+# include "stdbool.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -32,7 +32,6 @@ typedef struct s_list
 }		t_list;
 
 char	*get_next_line(int fd);
-int		ft_atoi(const char *str);
 void	write_error(void);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -49,7 +48,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(int *));
 void	ft_lstiter(t_list *lst, void (*f)(int *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, int *(*f)(int *), void (*del)(int *));
-t_list	*ft_lstnew(int number);
+t_list	*ft_lstnew(int number, t_list **stack);
 int		ft_lstsize(t_list *lst);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -60,7 +59,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
-char	**ft_split(char *s, char c);
+char	**ft_split(char const *s, char c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);

@@ -6,7 +6,7 @@ SRC			=	push_swap.c utils.c instrcution_push_swap.c \
 				instruction_rotate.c instruction_rev_rotate.c \
 				instruction_maxnmin.c instruction_calculate_n_copy.c \
 				instruction_postion_n_combination.c instrction_LIS.c \
-				instruction_sort.c \
+				instruction_sort.c instruction_free.c\
 
 SRC_BONUS	=	checker.c check_utils.c check_instruction_one.c\
 				check_instruction_two.c check_instruction_three.c\

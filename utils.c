@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 22:57:28 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:10:56 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,7 @@ int	check_duplicate(t_list *stack_a, int value)
 	return (1);
 }
 
-void	check_sorted(t_list **stack_a, int ac, char **av)
-{
-	t_list	*current;
-	t_list	*next;
-
-	current = *stack_a;
-	next = current->next;
-	while (next != NULL)
-	{
-		if (current->number > next->number)
-			return ;
-		current = current->next;
-		next = next->next;
-	}
-	delete_list(stack_a);
-	if (ac == 2)
-		free_tab(av);
-	exit(0);
-}
-
-void	check_inverted(t_list **stack_a)
+void	check_inverted(t_list **stack_a, int argc)
 {
 	t_list	*current;
 	t_list	*next;
@@ -88,5 +68,23 @@ void	check_inverted(t_list **stack_a)
 		current = current->next;
 		next = next->next;
 	}
-	swap_a(stack_a);
+	if (argc > 2)
+		swap_a(stack_a);
 }
+
+int	is_numeric(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (str[i] == '\0')
+		return (1);
+	while (str[i] != '\0' && ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
+}
+

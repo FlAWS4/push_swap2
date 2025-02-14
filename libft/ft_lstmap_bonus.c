@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:21:28 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/04 18:34:02 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/14 19:15:01 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 t_list	*ft_lstmap(t_list *lst, int *(*f)(int *), void (*del)(int *))
 {
 	t_list	*node;
@@ -33,7 +33,7 @@ t_list	*ft_lstmap(t_list *lst, int *(*f)(int *), void (*del)(int *))
 	}
 	return (newlst);
 }
-/*
+
 void	del(void *number)
 {
 		free(number);

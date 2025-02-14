@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 23:03:01 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:15:16 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 	new_node = NULL;
 	while (i < argc)
 	{
-		new_node = ft_lstnew(ft_atoi(argv[i]));
+		if (push_swap_strlen(argv[i]) >= 10)
+		{
+			return (-1);
+			break ;
+		}
+		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv), stack_a);
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
 		if (error == -1)
@@ -32,8 +37,7 @@ int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 		}
 		i++;
 	}
-	//check_sorted(stack_a, argc, argv);
-	check_inverted(stack_a);
+	check_inverted(stack_a, argc);
 	new_node = NULL;
 	return (0);
 }
@@ -63,6 +67,7 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 	free(stack_numbers);
 	free(arr);
 }
+
 void	check_arg3(int argc, char **argv, t_list **stack_a)
 {
 	int	i;
@@ -92,6 +97,7 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 	if (argc == 2)
 	{
 		arg = ft_split(argv[1], ' ');
+		check_error_arg(arg);
 		while (arg[size] != NULL)
 			size++;
 		i = initialize_list(stack_a, size, arg, 0);
@@ -101,27 +107,12 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 			free_tab(arg);
 			write_error();
 		}
-		///check_sorted(stack_a, argc, argv);
 	}
 	else if (argc >= 3)
 		check_arg3(argc, argv, stack_a);
 	free_tab(arg);
 }
 
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
@@ -139,7 +130,7 @@ int	main(int argc, char **argv)
 	if (size == 2)
 	{
 		delete_list(&stack_a);
-		return (-1);
+		return (0);
 	}
 	sort_list(&stack_a, &stack_b, size);
 	delete_list(&stack_a);

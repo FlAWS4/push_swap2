@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 22:58:24 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:59:44 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 
 # include "./libft/libft.h"
 
+int		push_swap_strlen(char *str);
+void	free_tab(char **tab);
+void	check_error_arg(char **av);
+int		is_numeric(char *str);
+void	free_atoi(t_list **stack, char **argv);
+int		ft_atoi(const char *str, t_list **stack, char **argv);
 void	sort_list(t_list **stack_a, t_list **stack_b, int size);
-int	initialize_list(t_list **stack_a, int argc, char **argv, int i);
+int		initialize_list(t_list **stack_a, int argc, char **argv, int i);
 int		check_duplicate(t_list *stack_a, int value);
-void	check_sorted(t_list **stack_a, int ac, char **av);
-void	check_inverted(t_list **stack_a);
+void	check_inverted(t_list **stack_a, int argc);
 void	delete_list(t_list **stack);
 
 void	swap_a(t_list **stack_a);
