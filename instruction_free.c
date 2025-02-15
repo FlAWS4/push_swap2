@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 21:54:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/14 22:22:25 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/15 23:18:36 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	free_atoi(t_list **stack, char **argv)
 {
-	(void)argv;
+	free_tab(argv);
 	delete_list(stack);
 	ft_putstr_fd("Error\n", 2);
 	exit(0);

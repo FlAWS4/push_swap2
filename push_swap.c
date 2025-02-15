@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/14 23:15:16 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/15 23:17:28 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,27 @@ int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 {
 	t_list	*new_node;
 	int		error;
-
+	int		j;
+	
 	error = 0;
+	j = 0;
 	new_node = NULL;
 	while (i < argc)
 	{
-		if (push_swap_strlen(argv[i]) >= 10)
+		j = push_swap_strlen(argv[i]);
+		printf("%d\n", j);
+		if (j > 10)
 		{
 			return (-1);
 			break ;
 		}
 		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv), stack_a);
+		printf("stack_num-> %d\n", new_node->number);
+		if (!new_node)
+		{
+			return (-1);
+			break ;
+		}
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
 		if (error == -1)
@@ -98,7 +108,7 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 	{
 		arg = ft_split(argv[1], ' ');
 		check_error_arg(arg);
-		while (arg[size] != NULL)
+		while (arg[size] != NULL && ft_atoi(arg[size], stack_a, arg))
 			size++;
 		i = initialize_list(stack_a, size, arg, 0);
 		if (i == -1)

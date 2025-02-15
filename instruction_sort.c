@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:21 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/14 23:13:54 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:21:24 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,15 @@ void	move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int len)
 int	push_swap_strlen(char *str)
 {
 	int	i;
+	int	j;
 		
 	i = 0;
-	while (str[i] >= '1' && str[i] <= '9' && str[i])
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] >= '1' && str[i] <= '9')
+			j++;
 		i++;
-	return (i);
+	}
+	return (j);
 }
