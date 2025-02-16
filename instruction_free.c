@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   instruction_free.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 21:54:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/15 23:18:36 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:50:37 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	free_atoi(t_list **stack, char **argv)
+void	free_atoi(t_list **stack, char **argv, int size)
 {
-	free_tab(argv);
-	delete_list(stack);
-	ft_putstr_fd("Error\n", 2);
-	exit(0);
+	if (size == 2)
+	{
+		free_tab(argv);
+		write_error();
+	}
+	else
+	{
+		delete_list(stack);
+		write_error();
+	}
 }
 
-int	ft_atoi(const char *str, t_list **stack, char **argv)
+int	ft_atoi(const char *str, t_list **stack, char **argv, int size)
 {
 	unsigned int		i;
 	int					sign;
@@ -39,13 +45,13 @@ int	ft_atoi(const char *str, t_list **stack, char **argv)
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			free_atoi(stack, argv);
+			free_atoi(stack, argv, size);
 		number = (str[i] - '0') + (number * 10);
 		i++;
 	}
 	if ((number > 2147483648 && sign == -1)
 		|| (number > 2147483647 && sign == 1))
-		free_atoi(stack, argv);
+		free_atoi(stack, argv, size);
 	return (number * sign);
 }
 

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/15 23:17:28 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:54:39 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
+int	initialize_list(t_list **stack_a, int argc, char **argv, int i, int size)
 {
 	t_list	*new_node;
 	int		error;
@@ -25,14 +25,12 @@ int	initialize_list(t_list **stack_a, int argc, char **argv, int i)
 	while (i < argc)
 	{
 		j = push_swap_strlen(argv[i]);
-		printf("%d\n", j);
 		if (j > 10)
 		{
 			return (-1);
 			break ;
 		}
-		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv), stack_a);
-		printf("stack_num-> %d\n", new_node->number);
+		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv, size), stack_a);
 		if (!new_node)
 		{
 			return (-1);
@@ -86,7 +84,7 @@ void	check_arg3(int argc, char **argv, t_list **stack_a)
 	if (argc >= 3)
 	{
 		i = 0;
-		i = initialize_list(stack_a, argc, argv, 1);
+		i = initialize_list(stack_a, argc, argv, 1, 0);
 		if (i == -1)
 		{
 			delete_list(stack_a);
@@ -97,20 +95,20 @@ void	check_arg3(int argc, char **argv, t_list **stack_a)
 
 void	check_arguments(int argc, char **argv, t_list **stack_a)
 {
-	int		size;
+	int		ac;
 	char	**arg;
 	int		i;
 
 	i = 0;
 	arg = NULL;
-	size = 0;
+	ac = 0;
 	if (argc == 2)
 	{
 		arg = ft_split(argv[1], ' ');
 		check_error_arg(arg);
-		while (arg[size] != NULL && ft_atoi(arg[size], stack_a, arg))
-			size++;
-		i = initialize_list(stack_a, size, arg, 0);
+		while (arg[ac] != NULL && ft_atoi(arg[ac], stack_a, arg, argc))
+			ac++;
+		i = initialize_list(stack_a, ac, arg, 0, 2);
 		if (i == -1)
 		{
 			delete_list(stack_a);

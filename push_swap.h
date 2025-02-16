@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/15 23:10:44 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:47:20 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int		push_swap_strlen(char *str);
 void	free_tab(char **tab);
 void	check_error_arg(char **av);
 int		is_numeric(char *str);
-void	free_atoi(t_list **stack, char **argv);
-int		ft_atoi(const char *str, t_list **stack, char **argv);
+void	free_atoi(t_list **stack, char **argv, int size);
+int		ft_atoi(const char *str, t_list **stack, char **argv, int size);
 void	sort_list(t_list **stack_a, t_list **stack_b, int size);
-int		initialize_list(t_list **stack_a, int argc, char **argv, int i);
+int		initialize_list(t_list **stack_a, int argc, char **argv, int i, int size);
 int		check_duplicate(t_list *stack_a, int value);
 void	check_inverted(t_list **stack_a, int argc);
 void	delete_list(t_list **stack);
