@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/16 17:54:39 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/16 23:08:34 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ int	initialize_list(t_list **stack_a, int argc, char **argv, int i, int size)
 			break ;
 		}
 		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv, size), stack_a);
-		if (!new_node)
-		{
-			return (-1);
-			break ;
-		}
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
 		if (error == -1)
@@ -62,7 +57,7 @@ void	sort_list(t_list **stack_a, t_list **stack_b, int size)
 		sort_three(stack_a);
 		return ;
 	}
-	if (size == 5)
+	if (size == 5 && check_sorted(stack_a) == -1)
 	{
 		sort_five(stack_a, stack_b);
 		return ;
@@ -106,9 +101,9 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 	{
 		arg = ft_split(argv[1], ' ');
 		check_error_arg(arg);
-		while (arg[ac] != NULL && ft_atoi(arg[ac], stack_a, arg, argc))
+		while (arg[ac] != NULL)
 			ac++;
-		i = initialize_list(stack_a, ac, arg, 0, 2);
+		i = initialize_list(stack_a, ac, arg, 0, argc);
 		if (i == -1)
 		{
 			delete_list(stack_a);
@@ -131,6 +126,8 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	size = 0;
 	if (argc < 2)
+		return (0);
+	else if (!argv[1][0])
 		return (0);
 	else
 		check_arguments(argc, argv, &stack_a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/16 17:47:20 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/16 23:09:30 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./libft/libft.h"
 
+int	check_sorted(t_list **stack_a);
 int		push_swap_strlen(char *str);
 void	free_tab(char **tab);
 void	check_error_arg(char **av);

@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/14 23:10:56 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:09:57 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_inverted(t_list **stack_a, int argc)
 		current = current->next;
 		next = next->next;
 	}
-	if (argc > 2)
+	if (argc > 1)
 		swap_a(stack_a);
 }
 
@@ -87,4 +87,21 @@ int	is_numeric(char *str)
 		return (0);
 	return (1);
 }
+int	check_sorted(t_list **stack_a)
+{
+	t_list	*current;
+	t_list	*next;
 
+	current = *stack_a;
+	next = current->next;
+	while (next != NULL)
+	{
+		if (current->number > next->number)
+		{
+			return (-1);
+		}
+		current = current->next;
+		next = next->next;
+	}
+	return (1);
+}

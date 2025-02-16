@@ -111,7 +111,7 @@ rm -rf test_check.txt
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
-  if [[ $line == "Error" ]]; then
+  if [[ $line == "NULL" ]]; then
   	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
   else
   	printf "${RED}4.[KO] ${DEF_COLOR}\n";
