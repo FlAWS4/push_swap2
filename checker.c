@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:14 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/14 22:07:22 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/17 05:24:26 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,55 @@ void	check_instruction(t_list **stack_a, t_list **stack_b, char *str)
 			check_instruction_rrr(stack_a, stack_b, str);
 		str = get_next_line(0);
 	}
+	free(str);
+}
+void	check_args3(int argc, char **argv, t_list **stack_a)
+{
+	int	i;
+
+	i = 0;
+	if (argc >= 3)
+	{
+		i = 0;
+		i = check_list(stack_a, argc, argv, 1, 0);
+		if (i == -1)
+		{
+			check_delete_list(stack_a);
+			write_error();
+		}
+	}
 }
 
 void	check_args(int argc, char **argv, t_list **stack_a)
 {
-	int		size;
+	int		ac;
 	char	**arg;
+	int		i;
 
+	i = 0;
 	arg = NULL;
-	size = 0;
+	ac = 0;
 	if (argc == 2)
 	{
 		arg = ft_split(argv[1], ' ');
-		while (arg[size] != NULL)
-			size++;
-		check_initialize_list(stack_a, size, arg, 0);
-		free(arg);
+		check_error_args(arg);
+		while (arg[ac] != NULL)
+			ac++;
+		i = check_list(stack_a, ac, arg, 0, argc);
+		if (i == -1)
+		{
+			check_delete_list(stack_a);
+			check_free_tab(arg);
+			write_error();
+		}
 	}
 	else if (argc >= 3)
-		check_initialize_list(stack_a, argc, argv, 1);
+		check_args3(argc, argv, stack_a);
+	check_free_tab(arg);
 }
 
-int	main(int argc, char *argv[])
+
+int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
@@ -80,6 +107,8 @@ int	main(int argc, char *argv[])
 	stack_b = NULL;
 	if (argc < 2)
 		return (0);
+	else if (!argv[1][0])
+		return (0);
 	else
 		check_args(argc, argv, &stack_a);
 	str = get_next_line(0);
@@ -88,5 +117,8 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("KO\n", 1);
 	else
 		ft_putstr_fd("OK\n", 1);
+	free(str);
+	check_delete_list(&stack_a);
+	check_delete_list(&stack_b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:44 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/13 17:09:40 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 04:38:11 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,46 @@ int	ok_or_ko(t_list **stack_a)
 	return (1);
 }
 
-void	check_initialize_list(t_list **stack_a, int argc, char **argv, int i)
+int	check_list(t_list **stack_a, int argc, char **argv, int i, int size)
 {
 	t_list	*new_node;
 	int		error;
-
+	int		j;
+	
 	error = 0;
+	j = 0;
 	new_node = NULL;
 	while (i < argc)
 	{
-		new_node = ft_lstnew(ft_atoi(argv[i]));
+		j = check_len(argv[i]);
+		if (j > 10)
+		{
+			return (-1);
+			break ;
+		}
+		new_node = ft_lstnew(check_atoi(argv[i], stack_a, argv, size), stack_a);
 		ft_lstadd_back(stack_a, new_node);
 		error = check_dup(*stack_a, new_node->number);
 		if (error == -1)
-			break ;
+			return (-1);
 		i++;
-	}
-	if (error == -1)
-	{
-		check_delete_list(stack_a);
-		write_error();
 	}
 	ok_or_ko(stack_a);
 	new_node = NULL;
+	return (0);
+}
+void	check_error_args(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i] && av)
+	{
+		if (check_numeric(av[i]))
+		{
+			check_free_tab(av);
+			write_error();
+		}
+		i++;
+	}
 }

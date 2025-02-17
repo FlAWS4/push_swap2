@@ -10,6 +10,7 @@ SRC			=	push_swap.c utils.c instrcution_push_swap.c \
 
 SRC_BONUS	=	checker.c check_utils.c check_instruction_one.c\
 				check_instruction_two.c check_instruction_three.c\
+				check_free.c\
 
 LIBFT		=	libft/libft.a
 

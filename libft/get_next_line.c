@@ -6,7 +6,7 @@
 /*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:26:50 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/03 18:50:13 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 05:58:28 by my42             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char	*ft_strjoin_gnl(char *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	new = (char *) malloc (sizeof(char) * (ft_strlen(s) + 2));
+	new = (char *) malloc (sizeof(char) * (ft_strlen(s) + 1));
 	if (!new)
-		return (NULL);
+		return (free(s), NULL);
 	while (s[i])
 	{
 		new[i] = s[i];
@@ -56,7 +56,7 @@ char	*ft_read_line_gnl(int fd, char *dst)
 	{
 		len = read(fd, &buf, 1);
 		if (len == -1)
-			return (NULL);
+			return (free(dst), NULL);
 		dst = ft_strjoin_gnl(dst, buf);
 	}
 	if (dst[0] == '\n')
@@ -80,4 +80,31 @@ char	*get_next_line(int fd)
 	if (!dst)
 		return (NULL);
 	return (dst);
+}
+int main(int argc, char **argv)
+{
+    int fd;
+    char *line;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        return 1;
+    }
+
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+
+    close(fd);
+    return 0;
 }
