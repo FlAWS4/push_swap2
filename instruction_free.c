@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instruction_free.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 21:54:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/16 17:50:37 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 19:23:12 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	delete_list(t_list **stack)
+{
+	t_list	*tmp;
+
+	if (*stack == NULL)
+		return ;
+	tmp = *stack;
+	while (*stack != NULL)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
 }

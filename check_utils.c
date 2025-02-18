@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:44 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 04:38:11 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 19:18:46 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,23 @@ int	ok_or_ko(t_list **stack_a)
 	return (1);
 }
 
-int	check_list(t_list **stack_a, int argc, char **argv, int i, int size)
+int	check_list(t_list **stack_a, int argc, char **argv, int size)
 {
 	t_list	*new_node;
 	int		error;
 	int		j;
-	
+	int		i;
+
 	error = 0;
-	j = 0;
+	i = 1;
+	if (size == 2)
+		i--;
 	new_node = NULL;
 	while (i < argc)
 	{
 		j = check_len(argv[i]);
 		if (j > 10)
-		{
 			return (-1);
-			break ;
-		}
 		new_node = ft_lstnew(check_atoi(argv[i], stack_a, argv, size), stack_a);
 		ft_lstadd_back(stack_a, new_node);
 		error = check_dup(*stack_a, new_node->number);
@@ -88,6 +88,7 @@ int	check_list(t_list **stack_a, int argc, char **argv, int i, int size)
 	new_node = NULL;
 	return (0);
 }
+
 void	check_error_args(char **av)
 {
 	int	i;

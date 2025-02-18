@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:06 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 04:38:09 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 19:22:31 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		is_numeric(char *str);
 void	free_atoi(t_list **stack, char **argv, int size);
 int		ft_atoi(const char *str, t_list **stack, char **argv, int size);
 void	sort_list(t_list **stack_a, t_list **stack_b, int size);
-int		initialize_list(t_list **stack_a, int argc, char **argv, int i, int size);
+int		initialize_list(t_list **stack_a, int argc, char **argv, int size);
 int		check_duplicate(t_list *stack_a, int value);
 void	check_inverted(t_list **stack_a, int argc);
 void	delete_list(t_list **stack);
@@ -73,7 +73,7 @@ void	initialize_lis_and_prev(int *lis, int *prev, int size);
 int		*define_lis(int *stack_numbers, int size, int *len);
 int		*find_lis_and_len(int *stack_numbers, int size, int *len);
 
-int	check_len(char *str);
+int		check_len(char *str);
 void	check_free_tab(char **tab);
 int		check_numeric(char *str);
 int		check_atoi(const char *str, t_list **stack, char **argv, int size);
@@ -83,7 +83,7 @@ void	check_delete_list(t_list **stack);
 int		check_dup(t_list *stack_a, int check);
 void	check_instruction(t_list **stack_a, t_list **stack_b, char *str);
 void	check_instruction_rrr(t_list **stack_a, t_list **stack_b, char *str);
-int		check_list(t_list **stack_a, int argc, char **argv, int i, int size);
+int		check_list(t_list **stack_a, int argc, char **argv, int size);
 int		ok_or_ko(t_list **stack_a);
 void	swap_a_check(t_list **stack_a);
 void	swap_b_check(t_list **stack_b);

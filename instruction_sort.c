@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:21 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/15 21:21:24 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:19:41 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	push_swap_strlen(char *str)
 {
 	int	i;
 	int	j;
-		
+
 	i = 0;
 	j = 0;
 	while (str[i])

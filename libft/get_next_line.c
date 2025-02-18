@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:26:50 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 05:58:28 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 18:20:46 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (dst);
 }
+/*
 int main(int argc, char **argv)
 {
     int fd;
@@ -108,3 +109,4 @@ int main(int argc, char **argv)
     close(fd);
     return 0;
 }
+*/

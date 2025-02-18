@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:14 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 05:24:26 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 19:21:08 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	check_instruction(t_list **stack_a, t_list **stack_b, char *str)
 	}
 	free(str);
 }
+
 void	check_args3(int argc, char **argv, t_list **stack_a)
 {
 	int	i;
@@ -59,7 +60,7 @@ void	check_args3(int argc, char **argv, t_list **stack_a)
 	if (argc >= 3)
 	{
 		i = 0;
-		i = check_list(stack_a, argc, argv, 1, 0);
+		i = check_list(stack_a, argc, argv, 0);
 		if (i == -1)
 		{
 			check_delete_list(stack_a);
@@ -83,7 +84,7 @@ void	check_args(int argc, char **argv, t_list **stack_a)
 		check_error_args(arg);
 		while (arg[ac] != NULL)
 			ac++;
-		i = check_list(stack_a, ac, arg, 0, argc);
+		i = check_list(stack_a, ac, arg, argc);
 		if (i == -1)
 		{
 			check_delete_list(stack_a);
@@ -95,7 +96,6 @@ void	check_args(int argc, char **argv, t_list **stack_a)
 		check_args3(argc, argv, stack_a);
 	check_free_tab(arg);
 }
-
 
 int	main(int argc, char **argv)
 {

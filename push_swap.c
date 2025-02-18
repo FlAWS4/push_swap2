@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:49:47 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 03:52:17 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/17 19:19:56 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	initialize_list(t_list **stack_a, int argc, char **argv, int i, int size)
+int	initialize_list(t_list **stack_a, int argc, char **argv, int size)
 {
 	t_list	*new_node;
 	int		error;
 	int		j;
-	
+	int		i;
+
 	error = 0;
-	j = 0;
+	i = 1;
+	if (size == 2)
+		i--;
 	new_node = NULL;
 	while (i < argc)
 	{
 		j = push_swap_strlen(argv[i]);
 		if (j > 10)
-		{
 			return (-1);
-			break ;
-		}
 		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv, size), stack_a);
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
@@ -76,7 +76,7 @@ void	check_arg3(int argc, char **argv, t_list **stack_a)
 	if (argc >= 3)
 	{
 		i = 0;
-		i = initialize_list(stack_a, argc, argv, 1, 0);
+		i = initialize_list(stack_a, argc, argv, 0);
 		if (i == -1)
 		{
 			delete_list(stack_a);
@@ -100,7 +100,7 @@ void	check_arguments(int argc, char **argv, t_list **stack_a)
 		check_error_arg(arg);
 		while (arg[ac] != NULL)
 			ac++;
-		i = initialize_list(stack_a, ac, arg, 0, argc);
+		i = initialize_list(stack_a, ac, arg, argc);
 		if (i == -1)
 		{
 			delete_list(stack_a);

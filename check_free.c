@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/17 18:23:40 by mshariar          #+#    #+#             */
+/*   Updated: 2025/02/17 18:25:16 by mshariar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
 #include "push_swap.h"
 
@@ -16,11 +28,12 @@ int	check_numeric(char *str)
 		return (0);
 	return (1);
 }
+
 int	check_len(char *str)
 {
 	int	i;
 	int	j;
-		
+
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -31,6 +44,7 @@ int	check_len(char *str)
 	}
 	return (j);
 }
+
 void	check_free(t_list **stack, char **argv, int size)
 {
 	if (size == 2)
@@ -72,6 +86,7 @@ int	check_atoi(const char *str, t_list **stack, char **argv, int size)
 		check_free(stack, argv, size);
 	return (number * sign);
 }
+
 void	check_free_tab(char **tab)
 {
 	int	i;

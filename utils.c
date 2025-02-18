@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:36 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/16 23:09:57 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:22:03 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,6 @@ void	initialize_lis_and_prev(int *lis, int *prev, int size)
 		lis[i] = 1;
 		prev[i] = -1;
 		i++;
-	}
-}
-
-void	delete_list(t_list **stack)
-{
-	t_list	*tmp;
-
-	if (*stack == NULL)
-		return ;
-	tmp = *stack;
-	while (*stack != NULL)
-	{
-		tmp = (*stack)->next;
-		free(*stack);
-		*stack = tmp;
 	}
 }
 
@@ -87,6 +72,7 @@ int	is_numeric(char *str)
 		return (0);
 	return (1);
 }
+
 int	check_sorted(t_list **stack_a)
 {
 	t_list	*current;
