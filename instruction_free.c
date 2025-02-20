@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 21:54:32 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 19:23:12 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:55:28 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	check_error_arg(char **av)
 	int	i;
 
 	i = 0;
+	if (!av[0])
+	{
+		free_tab(av);
+		write_error();
+	}
 	while (av[i] && av)
 	{
 		if (is_numeric(av[i]))
