@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: my42 <my42@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:11:30 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/04 18:33:50 by my42             ###   ########.fr       */
+/*   Updated: 2025/02/18 19:13:42 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	ft_lstiter(t_list *lst, void (*f)(int *))
 		lst = lst->next;
 	}
 }
-
+/*
 void	func(void *number)
 {
 	*(int *)number += 1;
 }
-/*
+
 int	main()
 {
 	int	*data1 = malloc(sizeof(int));

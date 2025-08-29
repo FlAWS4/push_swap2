@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:46:44 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/20 21:45:35 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:30:48 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_delete_list(t_list **stack)
 {
 	t_list	*tmp;
 
-	if (*stack == NULL)
+	if (!stack || !*stack)
 		return ;
 	tmp = *stack;
 	while (*stack != NULL)
@@ -46,6 +46,8 @@ int	ok_or_ko(t_list **stack_a)
 	t_list	*current;
 	t_list	*next;
 
+	if (!stack_a || !*stack_a)
+		return (-1);
 	current = *stack_a;
 	next = current->next;
 	while (next != NULL)

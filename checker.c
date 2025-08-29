@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:14 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 19:21:08 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:30:48 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	check_instruction(t_list **stack_a, t_list **stack_b, char *str)
 			rotate_r_check(stack_a, stack_b);
 		else
 			check_instruction_rrr(stack_a, stack_b, str);
+		free(str);
 		str = get_next_line(0);
 	}
-	free(str);
 }
 
 void	check_args3(int argc, char **argv, t_list **stack_a)
@@ -113,11 +113,10 @@ int	main(int argc, char **argv)
 		check_args(argc, argv, &stack_a);
 	str = get_next_line(0);
 	check_instruction(&stack_a, &stack_b, str);
-	if (ok_or_ko(&stack_a) == -1)
-		ft_putstr_fd("KO\n", 1);
-	else
+	if (ok_or_ko(&stack_a) == 1 && stack_b == NULL)
 		ft_putstr_fd("OK\n", 1);
-	free(str);
+	else
+		ft_putstr_fd("KO\n", 1);
 	check_delete_list(&stack_a);
 	check_delete_list(&stack_b);
 	return (0);

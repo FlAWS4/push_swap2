@@ -6,7 +6,7 @@
 /*   By: mshariar <mshariar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:56:29 by mshariar          #+#    #+#             */
-/*   Updated: 2025/02/17 19:33:19 by mshariar         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:17:40 by mshariar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "stdbool.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_list
