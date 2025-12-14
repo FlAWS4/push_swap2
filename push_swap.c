@@ -125,14 +125,14 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	else if (!argv[1][0])
-		return (0);
+		return (write(2, "Error\n", 6), 1);
 	else
 		check_arguments(argc, argv, &stack_a);
 	size = ft_lstsize(stack_a);
 	if (size == 2)
 	{
 		delete_list(&stack_a);
-		return (0);
+		return (1);
 	}
 	if (check_sorted(&stack_a) == -1)
 		sort_list(&stack_a, &stack_b, size);

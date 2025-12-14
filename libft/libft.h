@@ -22,7 +22,7 @@
 # include "stdbool.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list
@@ -78,7 +78,7 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 char	*get_next_line(int fd);
 char	*ft_read_line_gnl(int fd, char *dst);
-char	*ft_strjoin_gnl(char *s, char c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 int		ft_strlen_gnl(char *s);
 int		ft_strcmp(char *s1, char *s2);
 
