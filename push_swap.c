@@ -13,71 +13,71 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	initialize_list(t_list **stack_a, int argc, char **argv, int size)
+int	build_stack_from_args(t_list **stack_a, int argc, char **argv, int sz)
 {
 	t_list	*new_node;
 	int		error;
-	int		j;
-	int		i;
+	int		arg_idx;
+	int		idx;
 
 	error = 0;
-	i = 1;
-	if (size == 2)
-		i--;
+	idx = 1;
+	if (sz == 2)
+		idx--;
 	new_node = NULL;
-	while (i < argc)
+	while (idx < argc)
 	{
-		j = push_swap_strlen(argv[i]);
-		if (j > 10)
+		arg_idx = push_swap_strlen(argv[idx]);
+		if (arg_idx > 10)
 			return (-1);
-		new_node = ft_lstnew(ft_atoi(argv[i], stack_a, argv, size), stack_a);
+		new_node = ft_lstnew(ft_atoi(argv[idx], stack_a, argv, sz), stack_a);
 		ft_lstadd_back(stack_a, new_node);
 		error = check_duplicate(*stack_a, new_node->number);
 		if (error == -1)
 			return (-1);
-		i++;
+		idx++;
 	}
-	check_inverted(stack_a, argc);
+	handle_reverse_sorted(stack_a, argc);
 	new_node = NULL;
 	return (0);
 }
 
-void	sort_list(t_list **stack_a, t_list **stack_b, int size)
+void	execute_sort_algorithm(t_list **stack_a, t_list **stack_b, int size)
 {
-	int	*stack_numbers;
-	int	*arr;
-	int	len;
+	int	*stack_values;
+	int	*lis_arr;
+	int	lis_len;
 
-	len = 0;
+	lis_len = 0;
 	if (size == 3)
 	{
-		sort_three(stack_a);
+		sort_three_elements(stack_a);
 		return ;
 	}
 	if (size == 5)
 	{
-		sort_five(stack_a, stack_b);
+		sort_five_elements(stack_a, stack_b);
 		return ;
 	}
-	stack_numbers = copy_stack_number(*stack_a, size);
-	arr = define_lis(stack_numbers, size, &len);
-	move_to_b(stack_a, stack_b, arr, len);
-	move_to_a(stack_a, stack_b);
-	search_min(stack_a, size);
-	free(stack_numbers);
-	free(arr);
+	stack_values = extract_stack_values(*stack_a, size);
+	lis_arr = compute_lis(stack_values, size, &lis_len);
+	transfer_non_lis_to_b(stack_a, stack_b, lis_arr, lis_len);
+	insert_back_sorted(stack_a, stack_b);
+	rotate_min_to_top(stack_a, size);
+	free(stack_values);
+	free(lis_arr);
 }
 
 void	check_arg3(int argc, char **argv, t_list **stack_a)
 {
-	int	i;
+	int	result;
 
-	i = 0;
+	result = 0;
 	if (argc >= 3)
 	{
-		i = 0;
-		i = initialize_list(stack_a, argc, argv, 0);
-		if (i == -1)
+		result = 0;
+		result = build_stack_from_args(stack_a, argc, argv, 0);
+		if (result == -1)
 		{
 			delete_list(stack_a);
 			write_error();
@@ -85,32 +85,32 @@ void	check_arg3(int argc, char **argv, t_list **stack_a)
 	}
 }
 
-void	check_arguments(int argc, char **argv, t_list **stack_a)
+void	validate_and_parse_args(int argc, char **argv, t_list **stack_a)
 {
-	int		ac;
-	char	**arg;
-	int		i;
+	int		arg_count;
+	char	**split_args;
+	int		result;
 
-	i = 0;
-	arg = NULL;
-	ac = 0;
+	result = 0;
+	split_args = NULL;
+	arg_count = 0;
 	if (argc == 2)
 	{
-		arg = ft_split(argv[1], ' ');
-		check_error_arg(arg);
-		while (arg[ac] != NULL)
-			ac++;
-		i = initialize_list(stack_a, ac, arg, argc);
-		if (i == -1)
+		split_args = ft_split(argv[1], ' ');
+		check_error_arg(split_args);
+		while (split_args[arg_count] != NULL)
+			arg_count++;
+		result = build_stack_from_args(stack_a, arg_count, split_args, argc);
+		if (result == -1)
 		{
 			delete_list(stack_a);
-			free_tab(arg);
+			free_tab(split_args);
 			write_error();
 		}
 	}
 	else if (argc >= 3)
 		check_arg3(argc, argv, stack_a);
-	free_tab(arg);
+	free_tab(split_args);
 }
 
 int	main(int argc, char **argv)
@@ -127,15 +127,15 @@ int	main(int argc, char **argv)
 	else if (!argv[1][0])
 		return (write(2, "Error\n", 6), 1);
 	else
-		check_arguments(argc, argv, &stack_a);
+		validate_and_parse_args(argc, argv, &stack_a);
 	size = ft_lstsize(stack_a);
 	if (size == 2)
 	{
 		delete_list(&stack_a);
 		return (1);
 	}
-	if (check_sorted(&stack_a) == -1)
-		sort_list(&stack_a, &stack_b, size);
+	if (is_stack_sorted(&stack_a) == -1)
+		execute_sort_algorithm(&stack_a, &stack_b, size);
 	delete_list(&stack_a);
 	delete_list(&stack_b);
 	return (0);

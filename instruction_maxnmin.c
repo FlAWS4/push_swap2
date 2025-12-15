@@ -13,61 +13,61 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	return_max_or_min(int nb, int *max_n_min, int size)
+int	check_if_extreme_value(int nb, t_extremes *ext, int size)
 {
-	if (nb > max_n_min[0])
-		return (max_n_min[2]);
-	if (nb < max_n_min[1])
-		return (max_n_min[3]);
+	if (nb > ext->max_val)
+		return (ext->max_pos);
+	if (nb < ext->min_val)
+		return (ext->min_pos);
 	return (size + 1);
 }
 
-int	max_or_min(t_list *stack_a, int nb, int size)
+int	find_extremes_and_position(t_list *stack_a, int nb, int size)
 {
-	int	max_n_min[5];
+	t_extremes	ext;
 
-	max_n_min[0] = stack_a->number;
-	max_n_min[1] = stack_a->number;
-	max_n_min[2] = 0;
-	max_n_min[3] = 0;
-	max_n_min[4] = 1;
+	ext.max_val = stack_a->number;
+	ext.min_val = stack_a->number;
+	ext.max_pos = 0;
+	ext.min_pos = 0;
+	ext.curr_pos = 1;
 	while (stack_a != NULL)
 	{
-		if (stack_a->number >= max_n_min[0])
+		if (stack_a->number >= ext.max_val)
 		{
-			max_n_min[0] = stack_a->number;
-			max_n_min[2] = max_n_min[4];
+			ext.max_val = stack_a->number;
+			ext.max_pos = ext.curr_pos;
 		}
-		if (stack_a->number < max_n_min[1])
+		if (stack_a->number < ext.min_val)
 		{
-			max_n_min[1] = stack_a->number;
-			max_n_min[3] = max_n_min[4] - 1;
+			ext.min_val = stack_a->number;
+			ext.min_pos = ext.curr_pos - 1;
 		}
 		stack_a = stack_a->next;
-		max_n_min[4]++;
+		ext.curr_pos++;
 	}
-	return (return_max_or_min(nb, max_n_min, size));
+	return (check_if_extreme_value(nb, &ext, size));
 }
 
-int	min_number(int a, int b)
+int	get_smaller_absolute(int a, int b)
 {
-	int	a1;
-	int	b1;
+	int	abs_a;
+	int	abs_b;
 
-	a1 = a;
-	b1 = b;
+	abs_a = a;
+	abs_b = b;
 	if (a < 0)
 		a *= -1;
 	if (b < 0)
 		b *= -1;
 	if (a == b)
-		return (a1);
+		return (abs_a);
 	if (a < b)
-		return (a1);
-	return (b1);
+		return (abs_a);
+	return (abs_b);
 }
 
-int	max_number(int a, int b)
+int	get_larger_absolute(int a, int b)
 {
 	if (a < 0)
 		a *= -1;
@@ -81,30 +81,30 @@ int	max_number(int a, int b)
 		return (a);
 }
 
-void	search_min(t_list **stack_a, int size)
+void	rotate_min_to_top(t_list **stack_a, int size)
 {
-	int		pos;
-	int		pos_min;
-	int		min;
-	t_list	*tmp;
+	int		position;
+	int		min_pos;
+	int		min_val;
+	t_list	*node;
 
-	pos_min = 0;
-	pos = 0;
-	tmp = *stack_a;
-	min = tmp->number;
-	while (pos < size)
+	min_pos = 0;
+	position = 0;
+	node = *stack_a;
+	min_val = node->number;
+	while (position < size)
 	{
-		if (min > tmp->number)
+		if (min_val > node->number)
 		{
-			min = tmp->number;
-			pos_min = pos;
+			min_val = node->number;
+			min_pos = position;
 		}
-		tmp = tmp->next;
-		pos++;
+		node = node->next;
+		position++;
 	}
-	tmp = NULL;
-	pos = count_moves_b(pos_min, size);
-	push_min_to_top(pos, 0, stack_a, &tmp);
+	node = NULL;
+	position = compute_moves_for_stack_b(min_pos, size);
+	execute_combined_rotations(position, 0, stack_a, &node);
 }
 /*
 printf("max_n_min: [%d, %d, %d, %d, %d]\n",

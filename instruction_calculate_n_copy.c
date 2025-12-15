@@ -13,77 +13,77 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	count_moves(int min, int len, int size)
+int	calculate_rotation_cost(int min, int len, int size)
 {
-	int	i;
+	int	result;
 
 	if (min > (size / 2))
 		min = min - size;
 	if (len > (size / 2))
 		len = len - size;
-	i = min_number(len, min);
-	return (i);
+	result = get_smaller_absolute(len, min);
+	return (result);
 }
 
-int	count_moves_b(int len, int size)
+int	compute_moves_for_stack_b(int len, int size)
 {
 	if (len > (size / 2))
 		len = len - size;
 	return (len);
 }
 
-int	count_moves_a(t_list *stack_a, int nb, int size)
+int	compute_moves_for_stack_a(t_list *stack_a, int nb, int size)
 {
-	t_list	*tmp;
-	int		i;
+	t_list	*node;
+	int		idx;
 
-	tmp = stack_a;
-	i = max_or_min(stack_a, nb, size);
-	if (i != size + 1)
-		return (count_moves_b(i, size));
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	if (nb < stack_a->number && nb > tmp->number)
+	node = stack_a;
+	idx = find_extremes_and_position(stack_a, nb, size);
+	if (idx != size + 1)
+		return (compute_moves_for_stack_b(idx, size));
+	while (node->next != NULL)
+		node = node->next;
+	if (nb < stack_a->number && nb > node->number)
 		return (0);
-	i = 1;
+	idx = 1;
 	while (!(nb > stack_a->number && nb < (stack_a->next)->number))
 	{
 		stack_a = stack_a->next;
-		i++;
+		idx++;
 	}
-	return (count_moves_b(i, size));
+	return (compute_moves_for_stack_b(idx, size));
 }
 
-int	*copy_stack_number(t_list *stack_a, int size)
+int	*extract_stack_values(t_list *stack_a, int size)
 {
-	int	*arr;
-	int	i;
+	int	*values;
+	int	idx;
 
-	i = 0;
-	arr = (int *) malloc (sizeof(int) * size + 1);
-	if (!arr)
+	idx = 0;
+	values = (int *) malloc (sizeof(int) * size + 1);
+	if (!values)
 		write_error();
 	while (stack_a != NULL)
 	{
-		arr[i++] = (stack_a)->number;
+		values[idx++] = (stack_a)->number;
 		stack_a = (stack_a)->next;
 	}
-	return (arr);
+	return (values);
 }
 
-int	*copy_int_array(int	*arr, int size)
+int	*duplicate_int_array(int	*arr, int size)
 {
-	int	i;
-	int	*cpy;
+	int	idx;
+	int	*copy;
 
-	i = 0;
-	cpy = (int *) malloc (sizeof(int) * size);
-	if (!arr || !cpy)
+	idx = 0;
+	copy = (int *) malloc (sizeof(int) * size);
+	if (!arr || !copy)
 		write_error();
-	while (i < size)
+	while (idx < size)
 	{
-		cpy[i] = arr[i];
-		i++;
+		copy[idx] = arr[idx];
+		idx++;
 	}
-	return (cpy);
+	return (copy);
 }

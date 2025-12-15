@@ -13,122 +13,123 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-int	move_remaining_numbers(t_list *stack_a, int size, int *arr, int len)
+int	locate_non_lis_element(t_list *stack_a, int size, int *arr, int len)
 {
-	int	pos;
-	int	i;
+	int	position;
+	int	arr_idx;
 
-	pos = 0;
-	i = 0;
+	position = 0;
+	arr_idx = 0;
 	while (stack_a != NULL)
 	{
-		i = 0;
-		while (stack_a->number != arr[i] && i < len)
+		arr_idx = 0;
+		while (stack_a->number != arr[arr_idx] && arr_idx < len)
 		{
-			if (i == len - 1)
-				return (pos);
-			i++;
+			if (arr_idx == len - 1)
+				return (position);
+			arr_idx++;
 		}
 		stack_a = stack_a->next;
-		pos++;
+		position++;
 	}
 	size = -1;
 	return (size);
 }
 
-int	find_best_combination_helper(int *arr_a, int *arr_b, int *tmp, int size)
+int	compare_move_costs(int *arr_a, int *arr_b, int *tmp, int size)
 {
-	int	i;
-	int	pos;
+	int	idx;
+	int	min_pos;
 
-	pos = 0;
-	i = -1;
-	while (++i < size)
+	min_pos = 0;
+	idx = -1;
+	while (++idx < size)
 	{
-		if (tmp[i] < tmp[pos])
-			pos = i;
+		if (tmp[idx] < tmp[min_pos])
+			min_pos = idx;
 	}
 	free(arr_a);
 	free(arr_b);
 	free(tmp);
-	return (pos);
+	return (min_pos);
 }
 
-int	find_best_combination(int *arr_a, int *arr_b, int size)
+int	get_optimal_move_combo(int *arr_a, int *arr_b, int size)
 {
-	int	*tmp;
-	int	i;
+	int	*cost_combined;
+	int	idx;
 
-	i = -1;
-	tmp = (int *) malloc (sizeof(int) * size);
-	if (!tmp || !arr_a || !arr_b)
+	idx = -1;
+	cost_combined = (int *) malloc (sizeof(int) * size);
+	if (!cost_combined || !arr_a || !arr_b)
 		write_error();
-	while (++i < size)
+	while (++idx < size)
 	{
-		if ((arr_a[i] > 0 && arr_b[i] > 0)
-			|| (arr_a[i] < 0 && arr_b[i] < 0))
-			tmp[i] = max_number(arr_a[i], arr_b[i]);
+		if ((arr_a[idx] > 0 && arr_b[idx] > 0)
+			|| (arr_a[idx] < 0 && arr_b[idx] < 0))
+			cost_combined[idx] = get_larger_absolute(arr_a[idx], arr_b[idx]);
 		else
 		{
-			if (arr_a[i] < 0)
-				arr_a[i] *= -1;
-			if (arr_b[i] < 0)
-				arr_b[i] *= -1;
-			tmp[i] = arr_a[i] + arr_b[i];
+			if (arr_a[idx] < 0)
+				arr_a[idx] *= -1;
+			if (arr_b[idx] < 0)
+				arr_b[idx] *= -1;
+			cost_combined[idx] = arr_a[idx] + arr_b[idx];
 		}
 	}
-	return (find_best_combination_helper(arr_a, arr_b, tmp, size));
+	return (compare_move_costs(arr_a, arr_b, cost_combined, size));
 }
 
-int	push_min_to_top(int a, int b, t_list **stack_a, t_list **stack_b)
+int	execute_combined_rotations(int mv_a, int mv_b,
+	t_list **stack_a, t_list **stack_b)
 {
-	while (a < 0 && b < 0)
+	while (mv_a < 0 && mv_b < 0)
 	{
 		reverse_rotate_both(stack_a, stack_b);
-		a++;
-		b++;
+		mv_a++;
+		mv_b++;
 	}
-	while (a > 0 && b > 0)
+	while (mv_a > 0 && mv_b > 0)
 	{
 		rotate_both(stack_a, stack_b);
-		a--;
-		b--;
+		mv_a--;
+		mv_b--;
 	}
-	if (a < 0)
-		while (a++ < 0)
+	if (mv_a < 0)
+		while (mv_a++ < 0)
 			reverse_rotate_a(stack_a);
-	else if (a > 0)
-		while (a-- > 0)
+	else if (mv_a > 0)
+		while (mv_a-- > 0)
 			rotate_a(stack_a);
-	return (b);
+	return (mv_b);
 }
 
-int	find_best_position_b(t_list **stack_b, int size_b,
+int	calculate_target_position(t_list **stack_b, int size_b,
 	t_list **stack_a, int size_a)
 {
-	int		*arr_b;
-	int		*arr_a;
-	t_list	*tmp_b;
-	int		i;
+	int		*moves_b;
+	int		*moves_a;
+	t_list	*current_b;
+	int		idx;
 
-	i = -1;
-	tmp_b = *stack_b;
-	arr_a = (int *) malloc (sizeof(int) * size_b);
-	arr_b = (int *) malloc (sizeof(int) * size_b);
-	if (!arr_b || !arr_a)
+	moves_a = (int *) malloc (sizeof(int) * size_b);
+	moves_b = (int *) malloc (sizeof(int) * size_b);
+	if (!moves_b || !moves_a)
 		write_error();
-	while (++i < size_b)
-		arr_b[i] = count_moves_b(i, size_b);
-	i = -1;
-	while (++i < size_b && tmp_b != NULL)
+	idx = -1;
+	while (++idx < size_b)
+		moves_b[idx] = compute_moves_for_stack_b(idx, size_b);
+	idx = -1;
+	current_b = *stack_b;
+	while (++idx < size_b && current_b != NULL)
 	{
-		arr_a[i] = count_moves_a(*stack_a, tmp_b->number, size_a);
-		tmp_b = tmp_b->next;
+		moves_a[idx] = compute_moves_for_stack_a(*stack_a,
+				current_b->number, size_a);
+		current_b = current_b->next;
 	}
-	i = find_best_combination(copy_int_array(arr_a, size_b),
-			copy_int_array(arr_b, size_b), size_b);
-	i = push_min_to_top(arr_a[i], arr_b[i], stack_a, stack_b);
-	free(arr_a);
-	free(arr_b);
-	return (i);
+	idx = get_optimal_move_combo(duplicate_int_array(moves_a, size_b),
+			duplicate_int_array(moves_b, size_b), size_b);
+	idx = execute_combined_rotations(moves_a[idx], moves_b[idx],
+			stack_a, stack_b);
+	return (free(moves_a), free(moves_b), idx);
 }

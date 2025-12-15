@@ -13,69 +13,71 @@
 #include "./libft/libft.h"
 #include "push_swap.h"
 
-void	update_lis_and_prev(int *lis, int *prev, int *stack_numbers, int size)
+void	process_lis_update(int *lis, int *prev, int *stack_numbers, int size)
 {
-	int	i;
-	int	j;
+	int	outer;
+	int	inner;
 
-	i = 1;
-	while (i < size)
+	outer = 1;
+	while (outer < size)
 	{
-		j = 0;
-		while (j < i)
+		inner = 0;
+		while (inner < outer)
 		{
-			if (stack_numbers[i] > stack_numbers[j] && lis[i] < lis[j] + 1)
+			if (stack_numbers[outer] > stack_numbers[inner]
+				&& lis[outer] < lis[inner] + 1)
 			{
-				lis[i] = lis[j] + 1;
-				prev[i] = j;
+				lis[outer] = lis[inner] + 1;
+				prev[outer] = inner;
 			}
-			j++;
+			inner++;
 		}
-		i++;
+		outer++;
 	}
 }
 
-int	find_max_lis_length(int *lis, int size, int *end_index)
+int	get_lis_max_length(int *lis, int size, int *end_index)
 {
-	int	max_lis_length;
-	int	i;
+	int	max_length;
+	int	idx;
 
-	max_lis_length = 0;
+	max_length = 0;
 	*end_index = 0;
-	i = 0;
-	while (i < size)
+	idx = 0;
+	while (idx < size)
 	{
-		if (lis[i] > max_lis_length)
+		if (lis[idx] > max_length)
 		{
-			max_lis_length = lis[i];
-			*end_index = i;
+			max_length = lis[idx];
+			*end_index = idx;
 		}
-		i++;
+		idx++;
 	}
 	free(lis);
-	return (max_lis_length);
+	return (max_length);
 }
 
-int	*construct_lis(int *stack_numbers, int *prev, int lis_length, int end_index)
+int	*build_lis_sequence(int *stack_numbers,
+	int *prev, int lis_length, int end_index)
 {
 	int	*result;
-	int	i;
+	int	pos;
 
 	result = (int *)malloc(lis_length * sizeof(int));
 	if (!result)
 		write_error();
-	i = lis_length - 1;
+	pos = lis_length - 1;
 	while (end_index >= 0)
 	{
-		result[i] = stack_numbers[end_index];
+		result[pos] = stack_numbers[end_index];
 		end_index = prev[end_index];
-		i--;
+		pos--;
 	}
 	free(prev);
 	return (result);
 }
 
-int	*find_lis_and_len(int *stack_numbers, int size, int *len)
+int	*calculate_lis_with_length(int *stack_numbers, int size, int *len)
 {
 	int	*lis;
 	int	*prev;
@@ -85,15 +87,15 @@ int	*find_lis_and_len(int *stack_numbers, int size, int *len)
 	prev = (int *)malloc(size * sizeof(int));
 	if (!lis || !prev)
 		write_error();
-	initialize_lis_and_prev(lis, prev, size);
-	update_lis_and_prev(lis, prev, stack_numbers, size);
-	*len = find_max_lis_length(lis, size, &end_index);
-	return (construct_lis(stack_numbers, prev, *len, end_index));
+	setup_lis_arrays(lis, prev, size);
+	process_lis_update(lis, prev, stack_numbers, size);
+	*len = get_lis_max_length(lis, size, &end_index);
+	return (build_lis_sequence(stack_numbers, prev, *len, end_index));
 }
 
-int	*define_lis(int *stack_numbers, int size, int *len)
+int	*compute_lis(int *stack_numbers, int size, int *len)
 {
-	return (find_lis_and_len(stack_numbers, size, len));
+	return (calculate_lis_with_length(stack_numbers, size, len));
 }
 /*
 void print_array(int *arr, int size, const char *name)
